@@ -1,0 +1,13 @@
+@mixin flexed($content, $items) {
+    display: flex;
+    justify-content: $content;
+    align-items: $items;
+}
+ 
+  .myArticle {
+    @include flexed(center, center);  // 调用混入，并传递两个参数
+ }
+ 
+  .myNotes {
+    @include flexed(space-between, center); // 调用混入，并传递两个参数
+}
