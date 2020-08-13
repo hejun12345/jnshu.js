@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div class="bs">
+            <span>平民<input type="text" id="peopleNum">人</span>
+            <span>杀手<input type="text" id="ghostNum">人</span>
+        </div>
+
+        <div class="box3">
+            <span>玩家人数为</span>
+            <input type="text" id="inputNum" value="8">
+            <span>人</span>
+        </div>
+
+        <div class="box4">
+            <input type="button" class="pic1" onclick="btLeft()">
+            <input type="range" id="slipRange" oninput="change()" name="change" value="8" min="4" max="18" step="1">
+            <input type="button" class="pic2" onclick="btRight()">
+        </div>
+
+
+        <script>
+            var inputNum = document.getElementById("inputNum");
+            var ghostNum = document.getElementById("ghostNum");
+            var peopleNum = document.getElementById("peopleNum");
+            var slipRange = document.getElementById("slipRange");
+
+            //输入框取值
+            function inputNumber() {
+                if (inputNum.value >= 4 && inputNum.value <= 18) {
+                    slipRange.value = inputNum.value;
+                } else {
+                    alert("游戏限制人数为4~18人");
+                }
+                peopleNum.innerText = Math.ceil(slipRange.value * 2 / 3);
+                ghostNum.innerText = Math.floor(slipRange.value / 3);
+            }
+
+            //滑动条和输入框同步
+            function change() {
+                inputNum.value = slipRange.value;
+                peopleNum.innerText = Math.ceil(slipRange.value * 2 / 3);
+                ghostNum.innerText = Math.floor(slipRange.value / 3);
+            }
+        </script>
+    </body>
+
+</html>

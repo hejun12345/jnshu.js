@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <script>
+            function kiOrCi() {
+                if (playersNum.value < 15) {
+                    killers.value = Math.floor(playersNum.value / 3);
+                }
+                else {
+                    killers.value = Math.floor((playersNum.value - 1) / 3);
+                }
+                killers.innerText = killers.value;
+                //分配杀手数量
+                civilians.value = playersNum.value - killers.value;
+                civilians.innerText = civilians.value;
+                console.log(killers.value, civilians.value);
+                //分配平民数量
+            }
+
+            function pNumber() {
+                if (playersNum.value >= 4 && playersNum.value <= 18) {
+                    rangeNumber.value = playersNum.value;
+                    //设置数值范围
+                }
+                else {
+                    alert("请输入正确的玩家数量");
+                    playersNum.value = 4;
+                    //数值不正确时重置
+                }
+            }
+
+            function slid() {
+                playersNum.value = rangeNumber.value;
+                kiOrCi();
+                //设置滑动条的值等于玩家人数
+            }
+
+            function btnLeft() {
+                rangeNumber.value--;
+                playersNum.value = rangeNumber.value;
+            }
+            function btnRight() {
+                rangeNumber.value++;
+                playersNum.value = rangeNumber.value;
+                //+-按钮
+            }
+
+            rangeNumber.oninput = function () {
+                slid();
+                kiOrCi();
+            };
+            btnL.onclick = function () {
+                btnLeft();
+                kiOrCi();
+            };
+            btnR.onclick = function () {
+                btnRight();
+                kiOrCi();
+            };
+            playersNum.onchange = function () {
+                pNumber();
+                kiOrCi();
+            };
+            killers.onchange = function () {
+                kiOrCi();
+            };
+//点击，滑动 数值联动
+        </script>
+    </body>
+
+</html>

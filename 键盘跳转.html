@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <script>
+            define(function (require, exports, module) {
+                module.exports = function (ngModule) {
+                    ngModule.register.directive('ngEnter', function () {
+                        return {
+                            restrict: 'A',
+                            require: '?ngModel',
+                            link: function ($scope, element, attrs, controller) {
+                                element.bind("keydown keypress", function (event) {
+                                    if (event.which === 13) {
+                                        $scope.$apply(function () {
+                                            $scope.$eval(attrs.ngEnter);
+                                        }); event.preventDefault();
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+
+        </script>
+    </body>
+
+</html>

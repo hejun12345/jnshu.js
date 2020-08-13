@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>杀人游戏</title>
+        <link href="proportion.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <header>
+            <a class="back"></a>
+            <h2>参数设置</h2>
+            <a class="circled-help"></a>
+        </header>
+        <main>
+            <div class="box-top">
+                <h3 class="bor-r">玩家配比</h3>
+                <div class="bg-fff">
+                    <ul id="player" class="player">
+
+                    </ul>
+                </div>
+                <button class="cl-blue" onclick="Playermix()" id="btm-set">
+                    点击设置
+                </button>
+            </div>
+            <div class="box-container">
+                <input class="input-top" type="text" placeholder="水民词组">
+                <input class="input-button" type="text" placeholder="杀手词组">
+            </div>
+            <div class="box-bottom">
+                <div class="box-bottom-player">
+                    玩家人数
+                    <input id="PlayerNumber" class="box-bottom-people" type="text" value="4" onchange="playernumber()">
+                    人
+                </div>
+                <div class="box-bottom-input">
+                    <input class="bottom-input-minus" type="button" onclick="btmmin()">
+                    <input class="bottom-input-slider" type="range" id="RangeNumber" value="4" min="4" max="18" step="1"
+                        onchange="rangenumber()">
+                    <input class="bottom-input-add" type="button" onclick="btmadd()">
+                </div>
+            </div>
+        </main>
+        <footer>
+            <button class="footer-button-start" onclick="Start()">去发牌</button>
+        </footer>
+
+
+        <script src="task-2.js">
+            var playerNumber = document.getElementById("PlayerNumber");
+            var rangeNumber = document.getElementById("RangeNumber");
+            //关联rangeNumber和playerNumber两个input
+            function playernumber() {
+                if (playerNumber.value >= 4 && playerNumber.value <= 18) {
+                    rangeNumber.value = playerNumber.value;
+                }
+                else {
+                    alert("玩家数应在4-18人");
+                }
+            }
+            function rangenumber() {
+                playerNumber.value = rangeNumber.value;
+            }
+            //关联加号和减号按钮
+            function btmadd() {
+                rangeNumber.value++;
+                if (playerNumber.value >= 18) {
+                    alert("玩家人数必须小于等于18");
+                }
+                else {
+                    playerNumber.value = rangeNumber.value;
+                }
+            }
+            function btmmin() {
+                rangeNumber.value--;
+                if (playerNumber.value <= 4) {
+                    alert("玩家人数必须大于等于4");
+                }
+                else {
+                    playerNumber.value = rangeNumber.value;
+                }
+            }
+            //设置玩家配比
+            function Playermix() {
+                //玩家人数
+                var people = playerNumber.value;
+                //杀手
+                var killerNumber = Math.floor(people / 4);
+                //平民
+                var civilianNumber = people - killerNumber;
+                if (people < 4 || people > 18) {
+                    alert("玩家人数不能小于4大于18");
+                }
+                else {
+                    //增加杀手
+                    for (var i = 0; i < killerNumber; i++) {
+                        var element = document.getElementById("player");
+                        var Killer = document.createElement("li");
+                        var Square = document.createElement("span");
+                        var node = document.createTextNode("杀手1人");
+                        element.appendChild(Killer);
+                        Killer.appendChild(Square);
+                        Killer.appendChild(node);
+                        Killer.className = 'killer';
+                        //console.log(i)
+                        //console.log(killerNumber)
+                    }
+                    //增加平民
+                    for (var o = 0; o < civilianNumber; o++) {
+                        var element = document.getElementById("player");
+                        var Civilian = document.createElement("li");
+                        var Square = document.createElement("span");
+                        var node = document.createTextNode("平民1人");
+                        element.appendChild(Civilian);
+                        Civilian.appendChild(Square);
+                        Civilian.appendChild(node);
+                        Civilian.className = 'civilian';
+                        //console.log(o)
+                        //console.log(civilianNumber)
+                    }
+                }
+            }
+
+        </script>
+    </body>
+
+</html>

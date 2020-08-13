@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <script>
+            //对数组中的元素进行随机重新排列，并返回
+            //arr:数组
+            function shuffle(arr) {
+                for (let i = arr.length - 1; i >= 0; i--) {
+                    //随机从0-i中选择一个下标
+                    let randomIndex = Math.floor(Math.random() * (i + 1));
+                    //将选中的元素与arr[i]交换
+                    let t = arr[randomIndex];
+                    arr[randomIndex] = arr[i];
+                    arr[i] = t;
+                }
+                //返回随机重排后的数组
+                //随机重排过程发生在原数组上，并未产生新数组
+                return arr;
+            }
+
+            /*
+            function KdShuffle(arr) {
+                var len = arr.length,
+                    i, temp;
+
+                while (len) {
+                    i = Math.floor(Math.random() * len--);
+                    temp = arr[i];
+                    arr[i] = arr[len];
+                    arr[len] = temp;
+                }
+                return arr;
+            }
+            */
+
+            var b = [1, 2, 3, 4, 5, 6, 7, 8];
+
+            for (var i = 0; i < b.length; i++) {
+
+                var r = Math.floor(Math.random() * b.length);
+
+                var t = b[i];
+
+                b[i] = b[r];
+
+                b[r] = t;
+
+            }
+
+            return b;
+            console.log(b);
+
+
+            function getSize(length, width, height) {
+
+                // 先计算面积，放于临时变量中
+
+                var area = length * width;
+
+                // 再计算体积，放于临时变量中
+
+                var volume = length * width * height;
+
+                // 声明一个数组，放置面积和体积
+
+                var sizes = [area, volume];
+
+                // 最后返回这个数组
+
+                return sizes;
+
+            }
+            console.log(sizes);
+
+        </script>
+    </body>
+
+</html>

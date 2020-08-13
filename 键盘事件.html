@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+
+        <meta http-equiv="content-type" content="text/html; charset=gb2312" />
+        <script type="text/javascript">
+            function show() {
+                var e = window.event || arguments.callee.caller.arguments[0];
+                if (e.keyCode == 13) {
+                    alert("你按下了回车");
+                }
+            }
+        </script>
+        <input onkeydown="show();" value="">
+
+    </body>
+
+</html>

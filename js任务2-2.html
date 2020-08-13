@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            html {
+                font-size: 62.5%;
+            }
+
+            body {
+                background-color: #f0f0f0;
+            }
+
+            .nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 4rem;
+                font-size: 1.7rem;
+                color: white;
+                background-color: #29bde0;
+                margin-bottom: 1rem;
+            }
+
+            .nav img {
+                zoom: .5;
+            }
+
+            main {
+                width: 96%;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .box1 {
+                width: 100%;
+                height: 3rem;
+                line-height: 3rem;
+                text-align: center;
+                font-size: 1.7rem;
+                background-color: white;
+            }
+
+            .box2 {
+                width: 100%;
+                height: 30rem;
+                margin: 0.5rem 0;
+                display: flex;
+                justify-content: space-between;
+                background-color: white;
+
+            }
+
+            .box3 {
+                height: 4rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: white;
+                width: 100%;
+            }
+
+            input {
+                width: 40px;
+            }
+
+            .fn {
+                text-align: center;
+            }
+
+            button {
+                width: 96%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="nav">
+                <img src="./images/js/设置页面_01.png" class="box-one">
+                <div>参数设置</div>
+                <img src="./images/js/设置页面_02.png" class="box-three">
+            </div>
+        </header>
+
+        <main>
+            <h2 class="box1">玩家匹配</h2>
+
+            <div class="box2">
+                <p id="k">杀手<span></span>人</p>
+                <p id="p">平民<span></span>人</p>
+            </div>
+
+            <div class="box3">
+                <span>请输入玩家数量</span>
+                <input type="text" name="name" id="nn" />
+                <span>玩家数量为4-18</span>
+            </div>
+        </main>
+
+        <footer class="fn">
+            <button id="start" onclick="start()">去发牌</button>
+        </footer>
+
+        <!-- script -->
+        <script>
+            function show() {
+                var v = document.f.t.value;
+                alert(v);
+            }
+            function start() {
+                var a = document.getElementById("start").value;
+                alert(a);
+            }  
+        </script>
+    </body>
+
+</html>

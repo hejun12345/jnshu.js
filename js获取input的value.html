@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <script language="javascript">
+        function print() {
+            var a = myform.name.value;
+            alert(a);
+        }
+
+        document.onkeydown = function (event) {
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if (e && e.keyCode == 27) { // 按 Esc 
+                //要做的事情
+            }
+            if (e && e.keyCode == 113) { // 按 F2 
+                //要做的事情
+            }
+            if (e && e.keyCode == 13) { // enter 键
+                //要做的事情
+            }
+        };
+        
+        /*
+        function print() {
+            var a = myform.name.value;
+            alert(a);
+        }
+        */
+
+        function print() {
+            var a = document.getElementById("nn").value;
+            alert(a);
+        }  
+    </script>
+
+    <body>
+        <!--
+        <form name="myform">
+            <input type="text" name="name" id="nn" />
+            <input type="button" name="button" value="获取" onclick="print()" />
+        </form>
+  -->
+        <!--  -->
+
+        <form>
+            <input type="text" name="name" id="nn" />
+            <input type="button" name="button" value="获取" onclick="print()" />
+        </form>
+    </body>
+
+</html>
+</body>
+
+</html>

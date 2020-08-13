@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <script>
+            function shuffle(array) {
+                var _array = array.concat();
+
+                for (var i = _array.length; i--;) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = _array[i];
+                    _array[i] = _array[j];
+                    _array[j] = temp;
+                }
+
+                return _array;
+            }
+            
+            // Shuffle a collection, using the modern version of the
+            // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
+            _.shuffle = function (obj) {
+                var set = isArrayLike(obj) ? obj : _.values(obj);
+                var length = set.length;
+                var shuffled = Array(length);
+                for (var index = 0, rand; index < length; index++) {
+                    rand = _.random(0, index);
+                    if (rand !== index) shuffled[index] = shuffled[rand];
+                    shuffled[rand] = set[index];
+                }
+                return shuffled;
+            };
+
+            function shuffle(a) {
+                var length = a.length;
+                var shuffled = Array(length);
+
+                for (var index = 0, rand; index < length; index++) {
+                    rand = ~~(Math.random() * (index + 1));
+                    if (rand !== index)
+                        shuffled[index] = shuffled[rand];
+                    shuffled[rand] = a[index];
+                }
+
+                return shuffled;
+            }
+        </script>
+    </body>
+
+</html>

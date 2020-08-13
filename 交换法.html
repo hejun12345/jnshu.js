@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <script>
+            var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            var result = [];
+            var ranNum = 5;
+
+            for (var i = 0; i < ranNum; i++) {
+                // var ran = Math.floor(Math.random() * arr.length);
+                var ran = Math.floor(Math.random() * (arr.length - i));
+                result.push(arr[ran]);
+                var center = arr[ran];
+                // arr[ran] = arr[arr.length - 1];
+                // arr[arr.length - 1] = center;
+                // arr = arr.slice(0, arr.length - 1);
+
+                // arr[ran] = arr[arr.length - i - 1];
+                // arr[arr.length - i - 1] = center;
+                
+                arr[ran] = arr[arr.length - i - 1];
+            };
+
+            console.log(result);
+
+        </script>
+    </body>
+
+</html>

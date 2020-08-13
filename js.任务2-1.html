@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>首页</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            html {
+                font-size: 62.5%;
+            }
+
+            body {
+                background-color: #f0f0f0;
+            }
+
+            a {
+                color: white;
+                text-decoration: none;
+            }
+
+            /* input */
+            input[type="checkbox"] {
+                display: none;
+            }
+
+            /*为被选中的sidemenu后的aside设置属性（紧邻）*/
+            input[type="checkbox"]:checked~aside {
+                /*点击按钮即选中checked后,侧边栏位置变为贴着左边,配合ease-out使用,有渐变滑出的效果*/
+                left: 0;
+            }
+
+            input[type="checkbox"]:checked+label {
+                padding-left: 71%;
+                transition: 0.2s ease-out;
+            }
+
+            input[type="checkbox"]:checked~.bg-box {
+                padding-left: 70%;
+                transition: 0.2s ease-out;
+            }
+
+            /*控制侧边栏进出的按钮（外部包裹）*/
+            label {
+                position: absolute;
+                padding: 2rem;
+                transition: 0.2s ease-out;
+                zoom: .5;
+            }
+
+            /*侧边栏,初始位置为-xrem，即隐藏效果*/
+            aside {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: -70%;
+                width: 70%;
+                background-color: white;
+                border: 1px solid #29bde0;
+                color: #29bde0;
+                transition: 0.2s ease-out;
+                padding-bottom: 100%;
+            }
+
+            aside ul li {
+                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 1.6rem;
+                padding: 1rem 1%;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            aside ul li .pic-word {
+                display: flex;
+                align-items: center;
+            }
+
+            aside ul li .pic-word span {
+                display: inline-block;
+                width: 2.5rem;
+                height: 2.5rem;
+                margin-right: 1rem;
+            }
+
+            aside ul li .pic-word .sprite1 {
+                background: url("../images/任务13雪碧.jpg") no-repeat 0 -2%;
+            }
+
+            aside ul li .pic-word .sprite2 {
+                background: url("../images/任务13雪碧.jpg") no-repeat 0 32%;
+            }
+
+            aside ul li .pic-word .sprite3 {
+                background: url("../images/任务13雪碧.jpg") no-repeat 0 66%;
+            }
+
+            aside ul li .pic-word .sprite4 {
+                background: url("../images/任务13雪碧.jpg") no-repeat 0 100%;
+            }
+
+            .triangle {
+                position: relative;
+                height: 0px;
+                width: 0px;
+                border-top: 10px solid transparent;
+                border-left: 10px solid #5FC0CD;
+                border-bottom: 10px solid transparent;
+            }
+
+            .triangle:after {
+                content: '';
+                position: absolute;
+                top: -9px;
+                left: -12px;
+                border-top: 9px solid transparent;
+                border-left: 9px solid white;
+                border-bottom: 9px solid transparent;
+            }
+
+            .bg-box {
+                width: 100%;
+            }
+
+            .bg-box .bg-blue {
+                height: 4.4rem;
+                background-color: #29bde0;
+            }
+
+            .bg-box header .word-photo::before {
+                content: "";
+            }
+
+            .bg-box .word-photo {
+                width: 90%;
+                height: 6rem;
+                line-height: 6rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #ffffff;
+                padding: 1rem 0;
+                margin: 2.6rem auto;
+                font-size: 1.7rem;
+            }
+
+            .bg-box .word-photo .word1 {
+                text-align: center;
+                color: #b6b6b6;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .bg-box .word-photo a {
+                margin-right: 1vw;
+                color: #e7e7e7;
+                font-size: 2rem;
+                zoom: 2;
+                border-left: 10px solid #f0f0f0;
+            }
+
+            .bg-box .game {
+                margin: 0 auto;
+                width: 90%;
+                background-color: #ffffff;
+                text-align: center;
+                font-size: 1.2rem;
+            }
+
+            .bg-box .game .game-one {
+                height: 4.5rem;
+                line-height: 4.5rem;
+                border-bottom: 2px solid #fdd793;
+                color: #fbb435;
+                font-size: 1.9rem;
+                text-align: center;
+            }
+
+            .bg-box .game .game-start {
+                display: inline-block;
+                width: 80%;
+                height: 6.5rem;
+                line-height: 6.5rem;
+                font-size: 1.6rem;
+                margin: 1.5rem 0;
+                color: white;
+                background-color: #69d1e9;
+                border: none;
+                text-align: center;
+            }
+
+            .bg-box .game .game-item {
+                font-size: 0;
+                line-height: 0;
+                border-width: 15px;
+                border-color: #fbb435;
+                border-right-width: 0;
+                border-style: dashed;
+                border-left-style: solid;
+                border-top-color: transparent;
+                border-bottom-color: transparent;
+                position: absolute;
+                margin-top: 3rem;
+                margin-left: 1%;
+            }
+
+            .bg-box .game .pointer {
+                z-index: 9999;
+                display: flex;
+                justify-content: center;
+                margin: 1rem 0;
+            }
+
+            .bg-box .game .pointer a {
+                float: left;
+                width: 1rem;
+                height: 1rem;
+                margin: 0.5rem;
+                border-radius: 5rem;
+                background-color: #a6a6a6;
+            }
+
+            .bg-box .game .pointer a:hover {
+                background-color: #69d1e9;
+            }
+        </style>
+    </head>
+
+    <body>
+        <input type="checkbox" id="sidemenu">
+        <!--for 属性规定 label 与哪个表单元素绑定，即将这个控制侧边栏进出的按钮与checkbox绑定-->
+        <label for="sidemenu"><img src="./images/src/首页_03.png"></label>
+        <aside>
+            <ul>
+                <li>
+                    <div class="pic-word">
+                        <span class="sprite1"></span>
+                        <p class="title">公告</p>
+                    </div>
+                    <a href="" class="triangle"></a>
+                </li>
+                <li>
+                    <div class="pic-word">
+                        <span class="sprite2"></span>
+                        <p class="title">设置</p>
+                    </div>
+                    <a href="" class="triangle"></a>
+                </li>
+                <li>
+                    <div class="pic-word">
+                        <span class="sprite3"></span>
+                        <p class="title">关注</p>
+                    </div>
+                    <a href="" class="triangle"></a>
+                </li>
+                <li>
+                    <div class="pic-word">
+                        <span class="sprite4"></span>
+                        <p class="title">关于</p>
+                    </div>
+                    <a href="" class="triangle"></a>
+                </li>
+            </ul>
+        </aside>
+
+        <div class="bg-box" style="width: 100%;">
+            <div class="bg-blue"></div>
+            <header>
+                <div class="word-photo">
+                    <p class="word1">上次游戏：捉鬼猜词版</p>
+                    <a href="" class="triangle two"></a>
+                </div>
+            </header>
+            <main>
+                <div class="game">
+                    <div class="game-one">捉鬼游戏</div>
+                    <a href=""><button class="game-start">简化版</button></a>
+                    <p>有1133个用户在玩此游戏</p>
+                    <div>
+                        <a href=""><button class="game-start">猜词版</button></a>
+                        <a href=""><span class="game-item"></span></a>
+                    </div>
+                    <p>有1233个用户在玩此游戏</p>
+                    <a href=""><button class="game-start">白痴版</button></a>
+                    <p>有1333个用户在玩此游戏</p>
+                    <div class="pointer">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+
+</html>
