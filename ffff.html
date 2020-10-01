@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>投票</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
+
+            html {
+                font-size: 62.5%;
+            }
+
+            body {
+                background-color: #f0f0f0;
+            }
+
+            /* header */
+            .nav-hand {
+                height: 7rem;
+                line-height: 7rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #29bde0;
+                color: white;
+                font-size: 3.4rem;
+                padding: 0 1vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            main {
+                margin: 2rem 2rem
+            }
+
+            .big-box {
+                border: 1px solid #c9c9c9;
+                background-color: #f7f7f7;
+            }
+
+            .day {
+                text-align: center;
+                width: 100%;
+                height: 8.8rem;
+                line-height: 8.8rem;
+                border-bottom: 1px solid #c9c9c9;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <div class="nav-hand">
+                <img src="./images/第二天_03.png" class="box-one">
+                <div>法官台本</div>
+                <img src="./images/src/发言讨论结束，投票_02.png" class="box-three">
+            </div>
+        </header>
+
+        <main>
+            <div class="inbox">
+                <div class="day">第一天</div>
+                <div class="process">
+                    <img src="./images/流程(第一天)_03.png" alt="">
+                    <div>杀手杀人</div>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            var inbox = document.getElementById("inbox")
+
+            var inbox = '<div \"content1\" >\n' +
+                '        <span></span>\n' +
+                '        <span \"day\">第' + i + '天</span>\n' +
+                '        <span \"icon\"></span>\n' +
+                '    </div>\n' +
+                '    <div \"hidden1\">\n' +
+                '        <div \"bar\">\n' +
+                '            <div \"circular-first\"></div>\n' +
+                '            <div \"circular-second\"></div>\n' +
+                '        </div>\n' +
+                '        <ul>\n' +
+                '            <li \"killer\">\n' +
+                '                <div \"triangle1\"></div>\n' +
+                '                <span \"triangle2\">杀手杀人</span>\n' +
+                '            </li>\n' +
+                '            <div \"box2\">\n' +
+                '            <span>昨晚' + theKillNum + '号被杀，真实身份是' + theKillId + '</span>\n' +
+                '            </div>\n' +
+                '        </ul>\n' +
+                '        <ul>\n' +
+                '            <li \"die\">\n' +
+                '                <div \"triangle1\"></div>\n' +
+                '                <span \"triangle2\">亡灵发表遗言</span>\n' +
+                '            </li>\n' +
+                '        </ul>\n' +
+                '        <ul>\n' +
+                '            <li \"player\">\n' +
+                '                <div \"triangle1\"></div>\n' +
+                '                <span \"triangle2\">玩家依次发言</span>\n' +
+                '            </li>\n' +
+                '        </ul>\n' +
+                '        <ul>\n' +
+                '            <li \"vote\">\n' +
+                '                <div \"triangle1\"></div>\n' +
+                '                <span \"triangle2\">投票</span>\n' +
+                '            </li>\n' +
+                '        </ul>\n' +
+                '            <div \"box2\">\n' +
+                '            <span>昨晚' + theVoteNum + '号被投死，真实身份是' + theVoteId + '</span>\n' +
+                '            </div>\n' +
+                '    </div>';
+        </script>
+
+    </body>
+
+</html>

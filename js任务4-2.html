@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>投票</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
+
+            html {
+                font-size: 62.5%;
+            }
+
+            body {
+                background-color: #f0f0f0;
+            }
+
+            /* header */
+            .nav-hand {
+                height: 7rem;
+                line-height: 7rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #29bde0;
+                color: white;
+                font-size: 3.4rem;
+                padding: 0 1vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            main {
+                margin: 2rem;
+                margin-bottom: 10rem;
+            }
+
+            .big-box {
+                border: 1px solid #c9c9c9;
+                background-color: #f7f7f7;
+            }
+
+            .today {
+                text-align: center;
+                width: 100%;
+                line-height: 8.8rem;
+                font-size: 3rem;
+                border-bottom: 1px solid #c9c9c9;
+                color: #29bde0;
+            }
+
+            .today li {
+                height: 8.8rem;
+                border-bottom: 1px solid #c9c9c9;
+            }
+
+            .process {
+                position: relative;
+                width: 100%;
+                display: flex;
+                /* justify-content: space-between; */
+                align-items: center;
+                padding-top: 2rem;
+            }
+
+            .process img {
+                display: inline-block;
+                text-align: center;
+                /* margin-left: 2rem; */
+            }
+
+            .process .img {
+                width: 20%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .word {
+                width: 60%;
+                text-align: center;
+                position: relative;
+                line-height: 6rem;
+                margin: 1rem 0;
+                font-size: 3rem;
+                background-color: #24a7c6;
+                color: white;
+            }
+
+            .process::after {
+                position: absolute;
+                left: 10%;
+                top: 0;
+                content: "";
+                border: 1px solid red;
+                height: 100%;
+            }
+
+            #pic::before {
+                position: absolute;
+                top: 0;
+                content: "";
+                background-color: blue;
+                width: 15px;
+                height: 7px;
+                border-radius: 0 0px 7px 7px;
+                line-height: 7px;
+            }
+
+            .word::after {
+                content: '';
+                position: absolute;
+                top: 14px;
+                left: -19px;
+                border-top: 15px solid transparent;
+                border-right: 19px solid yellow;
+                border-bottom: 19px solid transparent;
+            }
+
+            /*  */
+            footer {
+                width: 100%;
+                position: fixed;
+                bottom: 0;
+                height: 10vw;
+                background-color: rgba(36, 167, 198, .5);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .btn1,
+            .btn2 {
+                width: 40%;
+                margin: 0 5vw;
+                height: 60%;
+                border: none;
+                border-radius: 10px;
+                color: white;
+                font-size: 3vw;
+            }
+
+            .btn1 {
+                background-color: #f66f6f;
+            }
+
+            .btn2 {
+                background-color: #fbb425;
+            }
+
+            #add {
+                display: flex;
+                justify-content: center;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <div class="nav-hand">
+                <img src="./images/第二天_03.png" class="box-one">
+                <div>法官台本</div>
+                <img src="./images/src/发言讨论结束，投票_02.png" class="box-three">
+            </div>
+        </header>
+
+        <main>
+            <div class="big-box">
+                <ul class="today" id="day"></ul>
+
+                <div class="process-box" id="boxs">
+                    <div class="process" id="box1">
+                        <div class="img" id="pic">
+                            <img src="./images/流程(第一天)_03.png" alt="">
+                        </div>
+                        <div class="word" id="play">杀手杀人</div>
+                    </div>
+                    <div class="process" id="box2">
+                        <div class="img">
+                            <img src="./images/流程(第一天)_03.png" alt="">
+                        </div>
+                        <div class="word">亡灵发表遗言</div>
+                    </div>
+                    <div class="process">
+                        <div class="img"></div>
+                        <div class="word">玩家依次发言</div>
+                    </div>
+                    <div class="process">
+                        <div class="img"></div>
+                        <div class="word">投票</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <button class="btn1" id="btn1">结束游戏</button>
+            <button class="btn2" id="btn2">法官日记</button>
+        </footer>
+
+        <script>
+            // 获取btn1按钮
+            var btn1 = document.getElementById("btn1");
+            // 获取btn按钮
+            var btn2 = document.getElementById("btn2");
+
+            // 获取传递玩家身份的数组allnum
+            var allnum = localStorage.getItem("allnum");
+            // 将字符串转换为数组,获取杀手，平民
+            var arr = allnum.split(",")
+
+            // // 查看身份数组
+            // console.log(allnum)
+            // // 查看身份数组的元素
+            // console.log(arr[0])
+            // // 查看数组的长度
+            // console.log(arr.length);
+
+            // 
+            var boxnumber = localStorage.getItem("array");
+            var array = allnum.split(",")
+            console.log(array);
+
+
+            var boxs = document.getElementById("boxs");
+            var index = 0;
+
+            window.onload = function () {
+
+                // 判断天数
+                // 获取id为day的节点
+                var day = document.getElementById("day");
+                // 创建li节点
+                var li = document.createElement("li");
+                // 向li中设置文本
+                li.innerHTML = "第一天";
+                // 将li添加到day中
+                day.appendChild(li);
+
+                box1.onclick = function () {
+                    if (index < arr.length) {
+                        index++;
+
+                        var div = document.createElement("div");
+                        div.className = "process";
+
+                        var add = document.createAttribute("id");
+                        add.value = "add"
+                        div.setAttributeNode(add)
+                        // 创建死亡玩家的文本
+                        var deadText = document.createTextNode(index + "号被杀死,真实身份是" + array[index - 1]);
+                        div.appendChild(deadText);
+
+                        // 获取id为box2的节点
+                        var box2 = document.getElementById("box2");
+                        // 获取id为boxs的节点
+                        var boxs = document.getElementById("boxs");
+                        /*  insertBefore()
+                            可以在指定的子节点前插入新的子节点
+                            语法：父节点.insertBefore(新节点,旧节点);
+                        */
+                        boxs.insertBefore(div, box2);
+                        console.log(index)
+                    }
+                };
+
+
+            };
+
+            // 跳转
+            play.onclick = function () {
+                if (index === array.length) {
+                    console.log(index)
+                    console.log(array.length)
+
+                    document.body.innerHTML = "";
+
+                }
+                //  else if (index != array.length) {
+                //     location.href = 'js任务4-1.html';
+                //     window.localStorage.setItem('allnum', arr);
+                // }
+
+            };
+
+            btn2.onclick = function () {
+                location.href = 'js任务4-1.html';
+                window.localStorage.setItem('allnum', arr)
+
+            };
+
+        </script>
+    </body>
+
+</html>
+<!-- 
+                    // 创建一个div节点，添加到#one下
+                // btn2.onclick = function (){}
+                btn1.onclick = function () {
+                    // 创建div元素节点
+                    /* document.createElement();
+                        可以创建一个元素节点对象
+                        需要一个标签名作为参数，将会根据该标签名创建元素节点，并将创建好的对象作为返回值返回
+                    */
+                    var span = document.createElement("span");
+
+                    // 创建广州文本节点
+                    /*  document.createTextNode
+                        创建文本节点对象
+                        需要一个文本内容作为参数，根据该内容创建文本节点，并将新的节点返回
+                    */
+                    var playerText = document.createTextNode(index + "身份");
+
+                    // 将playerText设置span的子节点
+                    /* appendChild()
+                        向一个父元素中添加一个新的节点
+                        语法： 父节点.appendChild(子节点)
+                    */
+                    span.appendChild(playerText);
+                    // 获取id为one的节点
+                    var one = document.getElementById("one");
+
+                    // 
+                    one.appendChild(span);
+                    // box.appendChild(span);
+                };
+ -->

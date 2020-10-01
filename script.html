@@ -1,0 +1,115 @@
+<script>
+    //获取输入玩家input节点
+    var playNumber = document.getElementById("playNumber");
+    // 获取杀手input节点
+    var killer = document.getElementById("killer");
+    // 获取平民input节点
+    var person = document.getElementById("person");
+    // 获取滑动条节点
+    var rangeNumber = document.getElementById("rangeNumber");
+
+    // 利用oninput输入事件触发玩家input属性
+    playNumber.oninput = function () {
+        var x = /\D/g;//定义正则，非数字规则
+        this.value = this.value.replace(x, "");// 符合正则规则替换为空值
+        Allplayer(this.value);// 获取当前对象输入的值
+    }
+
+    // 把获取的值赋给killer和person两个input
+    function Allplayer(value) {
+        killer.value = Math.round(value - (value / 2 + value / 6 + value / 24.1));
+        person.value = Math.round(value / 2 + value / 6 + value / 24.1);
+
+        // 当玩家值小于4或大于18赋给killer和person值为空
+        if (value < 4 || value > 18) {
+            killer.value = "";
+            person.value = "";
+        } else {
+            arr = [];  //声明一下这个空数组。
+            // 当玩家值小于4或大于18把killer和person以组数形式输出
+            for (var i = 0; i < killer.value; i++) {
+                arr.push("杀手");//输出杀手的数量push到数组
+            }
+            for (var i = 0; i < person.value; i++) {
+                arr.push("平民");//输出平民的数量push到数组
+            }
+        }
+    }
+    Allplayer(playNumber.value);//自运行
+
+    var array = arr;//访问全局变量arr
+
+    // 点击button按钮判断条件
+    function button() {
+        // 获取输入玩家input的value的值
+        var count = document.getElementById("playNumber").value;
+
+        // 判断条件语句
+        if (count < 4 || count > 18) {
+            confirm("请输入正确的玩家数量。");
+        } else {
+            // 洗牌算法
+            if (array) {
+                for (var i = array.length - 1; i > 0; i--) {
+                    // 打乱数组的玩家
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                };
+            };
+        };
+    };
+    console.log(array);
+
+    // 链接发牌按钮
+    window.onload = function () {
+        // 绑定btn按钮节点
+        var btn = document.getElementById("btn");
+        btn.onclick = function () {
+            var playNumber = document.getElementById("playNumber");
+            alert(playNumber.value);
+        };
+    };
+
+    // 键盘事件
+    document.onkeydown = function (event) {
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if (e && e.keyCode == 13) {
+            button();
+            // 玩家input节点节点值 赋值给 将滑动条节点值：使滑动条随输入值改变
+            rangeNumber.value = playNumber.value;
+        };
+    };
+
+    // 滑动条与总人数
+    //玩家人数的输入框与滚动条同步
+    function getNumber() {
+        if (playNumber.value >= 4 && playNumber.value <= 18) {
+            // 将滑动条节点值赋值 给 玩家input节点节点值
+            playNumber.value = rangeNumber.value;
+        }
+    }
+    //滚动条改变玩家人数随着改变
+    function change() {
+        playNumber.value = rangeNumber.value;
+        // 滑动时
+        Allplayer(rangeNumber.value)
+    }
+    //减号按钮与滚动条同步
+    function btLeft() {
+        rangeNumber.value--;
+        playNumber.value = rangeNumber.value;
+        // 加减按钮时
+        Allplayer(rangeNumber.value)
+    }
+    //加号按钮与滚动条同步
+    function btRight() {
+        rangeNumber.value++;
+        playNumber.value = rangeNumber.value;
+        Allplayer(rangeNumber.value)
+    }
+
+    location.href='js任务3.html';
+    window.localStorage.setItem('a','person')
+</script>

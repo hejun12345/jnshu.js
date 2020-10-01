@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模板字符串的使用</title>
+</head>
+
+<body>
+    <script>
+        const name = "wangshan";
+        const age = 26;
+        const sex = '男';
+        const job = "webGis";
+
+        function hello() {
+            return "Hello EveryOne!";
+        }
+
+        /* ES5 第一种方法 */
+
+        let html1 = '<ul><li>Name: ' + name +
+            '</li><li>Age: ' + age +
+            '</li><li>Sex: ' + sex +
+            '</li><li>Job: ' + job +
+            '</li></ul>';
+
+        /* ES5 第二种方法 */
+
+        let html2 = '<ul>' +
+            '<li>Name: ' + name + '</li>' +
+            '<li>Age: ' + age + '</li>' +
+            '<li>Sex: ' + sex + '</li>' +
+            '<li>Job: ' + job + '</li>' +
+            '</ul>';
+
+        /* ES6 模板字符串展示 */
+
+        let html3 = `<ul><li>Name:${name}</li>
+            <li>Age:${age}</li>
+            <li>Sex:${sex}</li>
+            <li>Job:${job}</li>
+            <li>${hello()}</li>
+            <li>${age > 30? 'Over 30': 'Under 30'}</li>
+            </ul>`
+
+        for (let html of [html1, html2, html3]) {
+            document.body.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>
+
+const name = 1;
+const number = 1;
+const pic = "./images/src/发言讨论结束，投票_04.png";
+
+let html = '<div>' +
+    '<p>Name: ' + name + '</p>' +
+    '<p>Age: ' + number + '</p>' +
+    '<div>: ' + pic + '</div>' +
+    '</div>';
+
+for (let html of [html]) {
+    document.body.innerHTML = html;
+}

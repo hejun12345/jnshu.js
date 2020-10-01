@@ -29,6 +29,7 @@
                 color: white;
                 background-color: #29bde0;
                 margin-bottom: 1rem;
+                padding: 0 2%;
             }
 
             .nav img {
@@ -38,50 +39,178 @@
             main {
                 width: 96%;
                 margin: 0 auto;
+                /* 
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
+                 */
             }
 
-            .box1 {
-                width: 100%;
-                height: 3rem;
-                line-height: 3rem;
-                text-align: center;
-                font-size: 1.7rem;
-                background-color: white;
-            }
-
-            .box2 {
-                width: 100%;
-                height: 30rem;
-                margin: 0.5rem 0;
+            .big-boxs {
                 display: flex;
                 justify-content: space-between;
                 background-color: white;
-
+                height: 30rem;
             }
 
-            .box3 {
-                height: 4rem;
+            .box-mate {
+                width: 20%;
+                font-size: 1.7rem;
+                border-right: 1px solid #d9d9d9;
+                ;
                 display: flex;
-                align-items: center;
+                flex-direction: column;
                 justify-content: center;
+                align-items: center
+            }
+
+            .box-mate span {
+                writing-mode: vertical-rl;
+            }
+
+            .box-people {
+                width: 80%;
+                position: relative;
+            }
+
+            .box-num {
+                margin: 2rem 2rem;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .box-flex {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .box-set {
+                width: 100%;
+                color: blue;
+                text-align: center;
+                padding: 2rem 0;
+                border-top: 1px solid #d9d9d9;
+                position: absolute;
+                bottom: 0;
+            }
+
+            .set-pic {
+                margin-left: 1rem;
+                zoom: .7;
+            }
+
+            .group {
+                background-color: white;
+                font-size: 1.4rem;
+                display: flex;
+                flex-direction: column;
+                margin: 0.5rem 0;
+            }
+
+            .group input {
+                border: none;
+                border-bottom: 1px solid #d9d9d9;
+                padding: 1.2rem 0;
+                margin-left: 2rem;
+                color: #d7d7d7;
+            }
+
+            .all-player {
                 background-color: white;
                 width: 100%;
             }
 
-            input {
-                width: 40px;
+            .all-num {
+                height: 4rem;
+                display: flex;
+                align-items: center;
+                /* justify-content: center; */
+                width: 100%;
+                font-size: 1.4rem;
+                margin-left: 2rem;
+
             }
 
-            .fn {
+            #killer,
+            #person,
+            #playNumber {
+                width: 3rem;
+                margin: 0 1rem;
+                background-color: #e1e1e1;
                 text-align: center;
+                border: 0;
+                font-size: 1.4rem;
             }
 
-            button {
+            /* 滑动条布局 */
+            .slide-num {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                width: 80%;
+                margin: 2rem auto;
+                padding: 1rem 0;
+                zoom: .5;
+            }
+
+            input {
+                color: #fab344;
+            }
+
+            /*横条样式*/
+            input[type=range] {
+                -webkit-appearance: none;
+                /*清除系统默认样式*/
+                width: 90%;
+                height: 5px;
+                /*横条的高度*/
+                background-color: #fab344;
+                outline: none;
+                cursor: pointer;
+            }
+
+            /*拖动块的样式*/
+            input[type=range]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                /*清除系统默认样式*/
+                width: 6rem;
+                height: 3.5rem;
+                background: url("./images/js/设置页面_11.png") no-repeat;
+                border: none;
+                cursor: pointer;
+            }
+
+            .pic1 {
+                width: 3rem;
+                height: 3.5rem;
+                background: url("./images/js/设置页面_12.png") no-repeat 50%;
+                outline: none;
+                border: none;
+            }
+
+            .pic2 {
+                width: 3rem;
+                height: 3.5rem;
+                background: url("./images/js/设置页面_13.png") no-repeat 50%;
+                outline: none;
+                border: none;
+            }
+
+            /* 发牌按钮 */
+            .last {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .last button {
                 width: 96%;
+                height: 50px;
+                font-size: 2rem;
+                color: white;
+                background-color: orange;
+                border: 0;
             }
         </style>
     </head>
@@ -89,41 +218,187 @@
     <body>
         <header>
             <div class="nav">
-                <img src="./images/js/设置页面_01.png" class="box-one">
+                <img src="./images/js/设置页面_01.png" class="nav-one">
                 <div>参数设置</div>
-                <img src="./images/js/设置页面_02.png" class="box-three">
+                <img src="./images/js/设置页面_02.png" class="nav-three">
             </div>
         </header>
 
         <main>
-            <h2 class="box1">玩家匹配</h2>
+            <div class="big-boxs">
+                <div class="box-mate">
+                    <span>玩家匹配</span>
+                </div>
 
-            <div class="box2">
-                <p id="k">杀手<span></span>人</p>
-                <p id="p">平民<span></span>人</p>
+                <div class="box-people">
+                    <div class="box-num">
+                        <div class="box-flex">
+                            <img src="./images/js/任务2-01.png">
+                            <span>平民<input type="text" id="person">人</span>
+                        </div>
+
+                        <div class="box-flex">
+                            <img src="./images/js/任务2-02.png">
+                            <span>杀手<input type="text" id="killer">人</span>
+                        </div>
+                    </div>
+
+                    <div class="box-set">
+                        <span>点击设置</span>
+                        <img src="./images/js/设置页面_0.png" class="set-pic">
+                    </div>
+                </div>
             </div>
 
-            <div class="box3">
-                <span>请输入玩家数量</span>
-                <input type="text" name="name" id="nn" />
-                <span>玩家数量为4-18</span>
+            <div class="group">
+                <input type="text" placeholder="水民词组">
+                <input type="text" placeholder="幽灵词组">
+            </div>
+
+            <div class="all-player">
+                <!-- 玩家人数 -->
+                <div class="all-num">
+                    <span>玩家人数为</span>
+                    <input type="text" id="playNumber" value="8">
+                    <span>人</span>
+                </div>
+
+                <!-- 滑动条 -->
+                <div class="slide-num">
+                    <input type="button" class="pic1" onclick="btLeft()">
+                    <input type="range" id="rangeNumber" oninput="change()" name="change" value="8" min="4" max="18"
+                        step="1">
+                    <input type="button" class="pic2" onclick="btRight()">
+                </div>
+
             </div>
         </main>
 
-        <footer class="fn">
-            <button id="start" onclick="start()">去发牌</button>
+        <footer class="last">
+            <!-- <button id="start" onclick="start()">去发牌</button> -->
+            <button id="btn">去发牌</button>
         </footer>
 
-        <!-- script -->
+
         <script>
-            function show() {
-                var v = document.f.t.value;
-                alert(v);
+            //获取输入玩家input节点
+            var playNumber = document.getElementById("playNumber");
+            // 获取杀手input节点
+            var killer = document.getElementById("killer");
+            // 获取平民input节点
+            var person = document.getElementById("person");
+            // 获取滑动条节点
+            var rangeNumber = document.getElementById("rangeNumber");
+
+            // 利用oninput输入事件触发玩家input属性
+            playNumber.oninput = function () {
+                var x = /\D/g;//定义正则，非数字规则
+                this.value = this.value.replace(x, "");// 符合正则规则替换为空值
+                Allplayer(this.value);// 获取当前对象输入的值
             }
-            function start() {
-                var a = document.getElementById("start").value;
-                alert(a);
-            }  
+
+            // 把获取的值赋给killer和person两个input
+            function Allplayer(value) {
+                killer.value = Math.round(value - (value / 2 + value / 6 + value / 24.1));
+                person.value = Math.round(value / 2 + value / 6 + value / 24.1);
+
+                // 当玩家值小于4或大于18赋给killer和person值为空
+                if (value < 4 || value > 18) {
+                    killer.value = "";
+                    person.value = "";
+                } else {
+                    arr = [];  //声明一下这个空数组。
+                    // 当玩家值小于4或大于18把killer和person以组数形式输出
+                    for (var i = 0; i < killer.value; i++) {
+                        arr.push("杀手");//输出杀手的数量push到数组
+                    }
+                    for (var i = 0; i < person.value; i++) {
+                        arr.push("平民");//输出平民的数量push到数组
+                    }
+                }
+            }
+            Allplayer(playNumber.value);//自运行
+
+            var array = arr;//访问全局变量arr
+
+            // 点击button按钮判断条件
+            function button() {
+                // 获取输入玩家input的value的值
+                var count = document.getElementById("playNumber").value;
+
+                // 判断条件语句
+                if (count < 4 || count > 18) {
+                    confirm("请输入正确的玩家数量。");
+                } else {
+                    // 洗牌算法
+                    if (array) {
+                        for (var i = array.length - 1; i > 0; i--) {
+                            // 打乱数组的玩家
+                            var j = Math.floor(Math.random() * (i + 1));
+                            var temp = array[i];
+                            array[i] = array[j];
+                            array[j] = temp;
+                        };
+                    };
+                };
+            };
+            console.log(array);
+            console.log(arr[0]);
+
+            // 链接发牌按钮
+            window.onload = function () {
+                // 绑定btn按钮节点
+                var btn = document.getElementById("btn");
+                btn.onclick = function () {
+                    var playNumber = document.getElementById("playNumber");
+                    button();
+                    alert(playNumber.value);
+
+                    // 设置
+                    location.href = 'js任务3.html';
+                    window.localStorage.setItem('allnum', arr)
+                };
+            };
+
+            // 键盘事件
+            document.onkeydown = function (event) {
+                var e = event || window.event || arguments.callee.caller.arguments[0];
+                if (e && e.keyCode == 13) {
+                    button();
+                    // 玩家input节点节点值 赋值给 将滑动条节点值：使滑动条随输入值改变
+                    rangeNumber.value = playNumber.value;
+                    console.log(arr);
+                };
+            };
+
+            // 滑动条与总人数
+            //玩家人数的输入框与滚动条同步
+            function getNumber() {
+                if (playNumber.value >= 4 && playNumber.value <= 18) {
+                    // 将滑动条节点值赋值 给 玩家input节点节点值
+                    playNumber.value = rangeNumber.value;
+                }
+            }
+            //滚动条改变玩家人数随着改变
+            function change() {
+                playNumber.value = rangeNumber.value;
+                // 滑动时
+                Allplayer(rangeNumber.value)
+                console.log(arr);
+            }
+            //减号按钮与滚动条同步
+            function btLeft() {
+                rangeNumber.value--;
+                playNumber.value = rangeNumber.value;
+                // 加减按钮时
+                Allplayer(rangeNumber.value)
+            }
+            //加号按钮与滚动条同步
+            function btRight() {
+                rangeNumber.value++;
+                playNumber.value = rangeNumber.value;
+                Allplayer(rangeNumber.value)
+            }
         </script>
     </body>
 

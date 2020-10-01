@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>投票</title>
+        <link rel="stylesheet" href="./style.css/css7-2.css">
+        <style>
+                * {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
+
+            html {
+                font-size: 62.5%;
+            }
+
+            body {
+                background-color: #29bde0;
+
+            }
+
+            /* header */
+            .first-box {
+                height: 3.5rem;
+                line-height: 3.5rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: #ffffff;
+                font-size: 1.7rem;
+                padding: 0 1vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            img {
+                zoom: .5;
+            }
+
+            .tooltip-boxs {
+                height: 4rem;
+                line-height: 4rem;
+                background: #b9e9f5;
+                padding-left: 10vw;
+            }
+
+            .tooltip-tittle {
+                width: 100%;
+                height: 100%;
+                line-height: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 1.3rem;
+            }
+
+            .tool {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .first {
+                background: url("./images/src/发言讨论结束，投票_03.png") no-repeat;
+                padding-right: 20px;
+                height: 55px;
+                height: 55px;
+                zoom: .5;
+                border: none;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            audio {
+                width: 10rem;
+                zoom: 1;
+                opacity: .1;
+            }
+
+            .boxa {
+                margin: 1vw 0 1vw 10vw;
+                font-size: 1.8rem;
+                color: white;
+            }
+
+            /* main */
+            .boxs {
+                display: flex;
+                flex-wrap: wrap;
+                align-content: space-between;
+            }
+
+            .box1 {
+                width: 20%;
+                height: 20vw;
+                margin: 0vw 7% 6% 7%;
+                background-color: orange;
+                border: 0.3vw solid white;
+            }
+
+            .box1:nth-child(3n-1) {
+                margin: 0 5% 6% 5%;
+            }
+
+            .one,
+            .two {
+                display: inline-block;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 3vw;
+            }
+
+            .one {
+                height: 80%;
+                background-color: #f5c97b;
+            }
+
+            .two {
+                height: 20%;
+                background-color: #83b09a;
+                color: white;
+            }
+
+            .box2 img {
+                margin-top: 1vw;
+                width: 20vw;
+                display: none;
+            }
+
+            .box1:last-child {
+                margin-bottom: 10vw;
+            }
+
+            .box1:hover img {
+                display: block;
+            }
+
+            /* footer */
+            footer,
+            footer div {
+                height: 15vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #29bde0;
+                position: fixed;
+                bottom: 0;
+            }
+
+            footer {
+                width: 100%;
+            }
+
+            footer div {
+                margin: 0 auto;
+                width: 86%;
+                border-top: 1px solid white;
+            }
+
+            .last {
+                width: 78%;
+                height: 9vw;
+                position: fixed;
+                bottom: 2vw;
+                border: none;
+                background-color: #fbb435;
+                font-size: 4vw;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <div class="first-box">
+                <img src="./images/src/发言讨论结束，投票_01.png" class="box-one">
+                <div>投票</div>
+                <img src="./images/src/发言讨论结束，投票_02.png" class="box-three">
+            </div>
+
+            <div class="tooltip-boxs">
+                <div class="tooltip-tittle">
+                    <p class="tool">发言讨论结束，请大家投票</p>
+                    <button class="first">
+                        <audio src="./images/video/财富自由.mp3" controls="controls" autoplay="autoplay" ></audio>
+                    </button>
+                </div>
+            </div>
+            <div class="tooltip-triangle"></div>
+            <div class="boxa">点击得票数最多的人的头像</div>
+        </header>
+
+        <main>
+            <div class="boxs">
+                <div class="box1">
+                    <p class="one">水民</p>
+                    <p class="two">1号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+                <div class="box1">
+                    <p class="one">水民</p>
+                    <p class="two">2号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+                <div class="box1">
+                    <p class="one">警察</p>
+                    <p class="two">3号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+
+                <div class="box1">
+                    <p class="one">法官</p>
+                    <p class="two">4号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+                <div class="box1">
+                    <p class="one">狙击手</p>
+                    <p class="two">5号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+                <div class="box1">
+                    <p class="one">医生</p>
+                    <p class="two">6号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+
+                <div class="box1">
+                    <p class="one">杀手</p>
+                    <p class="two">7号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+                <div class="box1">
+                    <p class="one">水民</p>
+                    <p class="two">8号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+                <div class="box1">
+                    <p class="one">水民</p>
+                    <p class="two">9号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+
+                <div class="box1">
+                    <p class="one">杀手</p>
+                    <p class="two">7号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+                <div class="box1">
+                    <p class="one">水民</p>
+                    <p class="two">8号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+                <div class="box1">
+                    <p class="one">水民</p>
+                    <p class="two">9号</p>
+                    <div class="box2">
+                        <img src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+        </main>
+
+        <footer>
+            <div>
+                <button class="last"><a href="./css.任务7-3.html">投死</a></button>
+            </div>
+        </footer>
+    </body>
+</html>

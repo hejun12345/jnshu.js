@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>投票</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
+
+            html {
+                font-size: 62.5%;
+            }
+
+            body {
+                background-color: #29bde0;
+            }
+
+            /* header */
+            .nav-hand {
+                height: 7rem;
+                line-height: 7rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: #ffffff;
+                font-size: 3.4rem;
+                padding: 0 1vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .nav-tool {
+                height: 8rem;
+                line-height: 8rem;
+                background: #b9e9f5;
+                padding-left: 10vw;
+            }
+
+            .tool-box {
+                width: 100%;
+                height: 100%;
+                line-height: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 2.6rem;
+            }
+
+            .box-word {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .box-audio {
+                background: url("./images/src/发言讨论结束，投票_03.png") no-repeat;
+                padding-right: 20px;
+                height: 55px;
+                height: 55px;
+                border: none;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            audio {
+                width: 10rem;
+                zoom: 1;
+                opacity: .1;
+            }
+
+            .nav-jiao {
+                margin-left: 10vw;
+                width: 0;
+                height: 0;
+                border-top: 20px solid #b9e9f5;
+                border-right: 10px solid #29bde0;
+                border-left: 10px solid #29bde0;
+            }
+
+            .nav-word {
+                margin: 1vw 0 1vw 10vw;
+                font-size: 2.4rem;
+                color: white;
+            }
+
+            /* main */
+            main {
+                margin-top: 2vw;
+                margin-left: 9vw;
+                margin-bottom: 16.5vw;
+            }
+
+            .bigboxs {
+                display: flex;
+                flex-wrap: wrap;
+                align-content: space-between;
+                padding: 0;
+                
+                pointer-events: none;                
+            }
+
+            .playerbox {
+                width: 20vw;
+                height: 20vw;
+                margin-right: 9vw;
+                margin-bottom: 7vw;
+                background-color: orange;
+                border: 0.3vw solid white;
+            }
+
+            .name,
+            .number {
+                display: inline-block;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .name {
+                height: 80%;
+                background-color: #f5c97b;
+                font-size: 1.5vw;
+            }
+
+            .number {
+                height: 20%;
+                background-color: #83b09a;
+                color: white;
+                font-size: 1.1vw;
+            }
+
+            .playerpic img {
+                margin-top: 1.5vw;
+                width: 20vw;
+                display: none;
+            }
+
+            .playerbox:last-child {
+                margin-bottom: 10vw;
+            }
+
+            .playerbox:hover img {
+                display: block;
+            }
+
+            /* footer */
+            footer,
+            footer div {
+                height: 15vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #29bde0;
+                position: fixed;
+                bottom: 0;
+            }
+
+            footer {
+                width: 100%;
+            }
+
+            footer div {
+                margin: 0 auto;
+                width: 86%;
+                border-top: 1px solid white;
+            }
+
+            .last {
+                width: 78%;
+                height: 9vw;
+                position: fixed;
+                bottom: 2vw;
+                border: none;
+                background-color: #fbb435;
+                font-size: 2vw;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <div class="nav-hand">
+                <img src="./images/src/发言讨论结束，投票_01.png" class="box-one">
+                <div>投票</div>
+                <img src="./images/src/发言讨论结束，投票_02.png" class="box-three">
+            </div>
+
+            <div class="nav-tool">
+                <div class="tool-box">
+                    <p class="box-word">发言讨论结束，请大家投票</p>
+                    <button class="box-audio">
+                        <audio src="./images/video/财富自由.mp3" controls="controls" autoplay="autoplay"></audio>
+                    </button>
+                </div>
+            </div>
+            <div class="nav-jiao"></div>
+            <div class="nav-word">点击得票数最多的人的头像</div>
+        </header>
+
+        <main>
+            <div class="bigboxs" id="boxs">
+                <!-- 
+                <div class="playerbox">
+                    <p class="name"></p>
+                    <p class="number"></p>
+                    <div class="playerpic">
+                        <img class="img" src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+             -->
+            </div>
+        </main>
+
+        <footer id="fo">
+            <div>
+                <button class="last" id="btn"><a href="./js任务4-2.html">开始游戏</a></button>
+            </div>
+        </footer>
+
+        <script>
+            // 获取传递玩家身份的数组allnum
+            var allnum = localStorage.getItem("allnum");
+            // 将字符串转换为数组,获取杀手，平民
+            var arr = allnum.split(",")
+
+            // 获取btn按钮
+            var btn = document.getElementById("btn");
+
+            // // 查看身份数组
+            // console.log(allnum)
+            // // 查看身份数组的元素
+            // console.log(arr[0])
+            // // 查看数组的长度
+            // console.log(arr.length);
+
+            // 获取mian节点
+            var main = document.querySelector("main")
+
+            var index = 0;
+
+
+
+            window.onload = function () {
+                //添加div
+                for (index = 0; index < arr.length; index++) {
+                    // 创建名为playerbox的div
+                    var box = document.createElement("div");
+                    box.className = "playerbox";
+                    box.setAttribute("data-idx", index)
+
+                    // 设置box中的内容
+                    box.innerHTML =
+                        "<p class='name'>" + (arr[index]) + "</p>" +
+                        "<p class='number'>" + (index + 1) + "号" + "</p>" +
+                        "<div class='playerpic'>" +
+                        "<img class='img' src='./images/src/发言讨论结束，投票_04.png'>" +
+                        "</div>";
+
+                    var boxs = document.getElementById("boxs");//获取boxs的节点
+                    boxs.appendChild(box);// 将boxs添加到box中
+
+                    // console.log(index);
+                    // console.log(arr[index]);
+
+
+                    // 方法1
+                    // 设置box点击事件，this指定box
+                    box.onclick = function () {
+                        // console.log(this.getAttribute('data-idx'))
+                        // console.log(this);
+                        this.style.backgroundColor = "#83b09a";
+                        event.srcElement.style.backgroundColor = "#83b09a";
+                        // console.log(event);
+                        // console.log(this.getAttribute('data-idx'))
+
+                        var array = this.getAttribute('data-idx');
+                        console.log(array);
+                        
+                        // location.href = 'js任务4-2.html';
+                        // window.localStorage.setItem('allnum', array)
+                    };
+
+                    // // 方法2
+                    // box.onclick = function (event) {
+                    //     event.srcElement
+                    //     event.srcElement.style.backgroundColor = "#83b09a";
+                    // }
+
+                    btn.onclick = function () {
+                        document.getElementById("fo").style.display = "none";
+                        
+                        document.getElementById("btn").innerHTML = "确定";
+                        btn.innerHTML =
+                            "<a href='./js任务4-2.html'>" + "确定" + "</a>";
+                        last.css("pointer-events","all")
+                        // location.href = 'js任务4-2.html';
+                        // window.localStorage.setItem('allnum', arr)
+                        // window.localStorage.setItem('boxnumber', array)
+                        // document.getElementByIdx("btn").disabled = true;
+                    };
+                };
+            };
+
+        </script>
+
+    </body>
+
+</html>

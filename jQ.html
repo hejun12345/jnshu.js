@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Demo</title>
+    </head>
+    <style>
+        p {
+            margin: 8px;
+            font-size: 16px;
+        }
+
+        .selected {
+            color: blue;
+        }
+
+        .highlight {
+            background: yellow;
+        }
+    </style>
+
+    <body>
+        <a href="http://jquery.com/">jQuery</a>
+        <script src="./jquery-3.5.1/jquery-3.5.1.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("a").click(function (event) {
+                    alert("The link will no longer take you to jquery.com");
+                    event.preventDefault();
+                });
+            });
+
+            $("a").click(function (event) {
+                event.preventDefault();
+                $(this).hide("slow");
+            });
+        </script>
+
+
+        <p>Hello</p>
+        <p>and</p>
+        <p>Goodbye</p>
+        <script>
+            $("p").last().addClass("selected");
+            $("p").last().addClass("selected highlight");
+        </script>
+    </body>
+
+</html>
+<br>
+////////////////////////////////////////
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>addClass demo</title>
+        <style>
+            div {
+                background: white;
+            }
+
+            .red {
+                background: red;
+            }
+
+            .red.green {
+                background: green;
+            }
+        </style>
+        <script src="./jquery-3.5.1/jquery-3.5.1.js"></script>
+    </head>
+
+    <body>
+        <div>This div should be white</div>
+        <div class="red">This div will be green because it now has the "green" and "red" classes.
+            It would be red if the addClass function failed.</div>
+        <div>This div should be white</div>
+        <p>There are zero green divs</p>
+
+        <script>
+            $("div").addClass(function (index, currentClass) {
+                var addedClass;
+
+                if (currentClass === "red") {
+                    addedClass = "green";
+                    $("p").text("There is one green div");
+                }
+
+                return addedClass;
+            });
+        </script>
+
+    </body>
+
+</html>

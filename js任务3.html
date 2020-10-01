@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="./jquery-3.5.1/jquery-3.5.1.min.js"></script>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            html {
+                font-size: 62.5%;
+            }
+
+            body {
+                background-color: #29bde0;
+            }
+
+            .nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 4rem;
+                font-size: 1.7rem;
+                color: white;
+                margin-bottom: 1rem;
+                padding: 0 2%;
+                border-bottom: 1px solid #74d4eb;
+            }
+
+            .nav img {
+                zoom: .5;
+            }
+
+            main {
+                margin-top: 4rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .boxs {
+                position: relative;
+                width: 70%;
+                height: 325px;
+                background-color: #ffedc5;
+                border: 3px solid white;
+            }
+
+            #box1 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #box2 {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .bg {
+                height: 100%;
+                margin: 2rem 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            #figure,
+            #figure2 {
+                position: absolute;
+                top: -1.5rem;
+                width: 3rem;
+                height: 3rem;
+                line-height: 3rem;
+                text-align: center;
+                background-color: white;
+                color: #f56b81;
+                border: 2px solid #ffedc5;
+                border-radius: 50%;
+            }
+
+            .picture {
+                width: 30rem;
+                height: 30rem;
+                border-radius: 50%;
+                zoom: .5;
+            }
+
+            #pic1 {
+                background: url("./images/翻牌_02.png") no-repeat 50%;
+            }
+
+            #pic2 {
+                background: url("./images/翻牌-2_01.png") no-repeat 50%;
+            }
+
+            #player {
+                color: blue;
+                font-size: 2rem;
+            }
+
+            #group {
+                color: #f56b81;
+                font-size: 2rem;
+            }
+
+            /* 查看身份 */
+            .last {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .last button {
+                width: 70%;
+                height: 50px;
+                font-size: 2rem;
+                color: white;
+                background-color: orange;
+                border: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="nav">
+                <img src="./images/js/设置页面_01.png" class="nav-one">
+                <div>查看身份</div>
+                <img src="./images/翻牌_01.png" class="nav-three">
+            </div>
+        </header>
+
+        <main>
+            <!-- 翻牌页面1 -->
+            <div class="boxs" id="box1">
+                <div id="figure">1</div>
+                <div class="picture" id="pic1"></div>
+            </div>
+
+            <!-- 翻牌页面2 -->
+            <div class="boxs" id="box2" style="display: none;">
+                <div id="figure2">1</div>
+                <div class="bg">
+                    <div class="picture" id="pic2"></div>
+                    <div id="player">角色：</div>
+                    <div id="group">词组：</div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="last">
+            <button type="button" id="btn">查看1号身份</button>
+        </footer>
+
+        <script>
+            // 获取按钮button节点
+            var button = document.querySelector('button');
+
+            // 获取传递玩家身份的数组allnum
+            var allnum = localStorage.getItem("allnum");
+            // console.log(localStorage.getItem("allnum"));
+            // 将字符串转换为数组,获取杀手，平民
+            var arr = allnum.split(",")
+
+            // 查看身份数组
+            console.log(allnum)
+            // 查看身份数组的元素
+            console.log(arr[0])
+            // 查看数组的长度
+            console.log(arr.length);
+
+            var index = 0;
+            // console.log(index);
+            var number = 2;
+            // console.log(number);
+
+            // 绑定btn点击事件
+            btn.onclick = function () {
+                if (number < arr.length + 1) {
+                    // 判断偶数
+                    if (index % 1 == 0) {
+                        // 页面1点击事件
+                        document.getElementById("box1").style.display = ""
+                        document.getElementById("box2").style.display = "none"
+                        // 查看身份
+                        button.textContent = "查看" + number + "号身份";
+                        // 设置角色身份
+                        document.getElementById('player').innerHTML = "角色:" + arr[index];
+                        // 数字文本
+                        document.getElementById('figure').innerHTML = number;
+                        index = index + 0.5;
+                        number++;
+
+                        console.log(arr);
+                        console.log(index);
+                        console.log(number);
+                        console.log(btn);
+
+                    } else {
+                        // 页面2点击事件
+                        document.getElementById("box1").style.display = "none"
+                        document.getElementById("box2").style.display = ""
+                        // 隐藏传递
+                        button.textContent = "隐藏并传递给" + number + "号";
+                        // 数字文本
+                        document.getElementById('figure2').innerHTML = (number - 1);
+                        index = index + 0.5;
+
+                        console.log(arr);
+                        console.log(index);
+                        console.log(number);
+                        console.log(btn);
+                    }
+
+
+                } else {
+                    // 设置
+                    location.href = 'js任务4-1.html';
+                    window.localStorage.setItem('allnum', arr)
+                }
+            }
+        </script>
+    </body>
+
+</html>

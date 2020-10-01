@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Question1</title>
+    </head>
+
+    <body>
+        <script>
+            //由用户输入员工数N 员工数=任务数
+            //每个员工都有一个自身可完成的任务难度系数Ti 1~10
+            //每个任务都有一个任务难度Wi 1~10
+            //只有在Ti>=Wi时，才能由员工接手该任务，且每个员工每日只能完成一个任务
+            //求：根据用户输入的情况算出存在的分配方式有多少
+            var n = prompt('请您输出员工的总人数：');
+            console.log('员工的总人数为' + n);
+            var str1 = prompt('请您输入员工们可以完成的任务难度系数（1~10），并且用逗号分隔开：');
+            var Ti = str1.split(",");
+            console.log(Ti);
+            var str2 = prompt('请您输入各个任务的难度系数（1~10），并且用逗号分隔开：')
+            var Wi = str2.split(",");
+            console.log(Wi);
+            //员工按照员工的工作能力由低到高排序
+            var Ti2 = Ti.sort(function (a, b) {
+                return a - b;
+            });
+            console.log(Ti2);
+            //任务按照任务难度由大到小排序
+            var Wi2 = Wi.sort(function (a, b) {
+                return b - a;
+            });
+            console.log(Wi2);
+            //创建一个num数组用于存放每次分配时可以选择的次数
+            var num = [];
+            var z = 0;
+            var result = 1;
+            var m = n;
+            //取出第一个任务 在员工能力排序表中找到能够完成该任务的最小数组号
+            for (var i = 0; i < n; i++) {
+                for (var j = 0; j < m; j++) {
+                    if (Wi2[i] > Ti2[j]) {
+                        continue;
+                        // j++;
+                    } else {
+                        num[z] = m - j;
+                        console.log('第' + i + '个任务可供选择的分配有:' + num[z]);
+                        z++;
+                        m--;
+                        break;
+                    }
+                }
+
+            }
+            for (var i = 0; i < num.length; i++) {
+                if (num[i] == 0) {
+                    continue;
+                }
+                var result = result * num[i];
+            }
+            console.log('您输入的情况存在的分配方式一共有：' + result + '种');
+            alert('您输入的情况存在的分配方式一共有：' + result + '种');
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <script>
+            //获取子节点的父节点
+            var main = document.querySelector("main");
+            //遍历所有动态添加div
+            for (var i = 0; i < kipeArrName.length; i++) {
+                var box = document.createElement("div");//添加子节点
+                box.className = "tips";//获取css属性
+                main.appendChild(box);//把box添加到父级中
+                var boxspan = document.createElement("span");//添加文字节点
+                box.appendChild(boxspan);
+                boxspan.innerHTML = kipeArrName[i];//添加玩家信息
+                var boxm = document.createElement("div");//添加节点的子节点
+                boxm.className = "tips-1";
+                box.appendChild(boxm);
+                boxm.innerHTML = i + 1;//添加玩家对应的个数
+                var img = document.createElement("img");//添加图片节点
+                img.className = "img1";
+                img.src = "13w/雪碧图组.png";//添加图组
+                box.appendChild(img);
+                img.style.display = "none";
+            }
+
+            window.onload = function () {
+                var boxs = document.querySelectorAll(".tips");
+                for (i = 0; i < boxs.length; i++) {
+                    boxs[i].onclick = function () {
+                        //boxs[i].style.background = "rgba(50,180,180,0.5)";
+                    }
+                    console.log(boxs.style);
+                }
+            }
+        </script>
+    </body>
+
+</html>
