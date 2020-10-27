@@ -4,6 +4,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="./jquery-3.5.1/jquery-3.5.1.min.js"></script>
+
         <title>投票</title>
         <style>
             * {
@@ -107,8 +109,8 @@
                 flex-wrap: wrap;
                 align-content: space-between;
                 padding: 0;
-                
-                pointer-events: none;                
+                /*  */
+                /* pointer-events: none; */
             }
 
             .playerbox {
@@ -152,9 +154,9 @@
                 margin-bottom: 10vw;
             }
 
-            .playerbox:hover img {
+            /* .playerbox:hover img {
                 display: block;
-            }
+            } */
 
             /* footer */
             footer,
@@ -186,6 +188,11 @@
                 border: none;
                 background-color: #fbb435;
                 font-size: 2vw;
+            }
+
+            .give {
+                background-color: #83b09a;
+                /* color: #83b09a; */
             }
         </style>
     </head>
@@ -226,19 +233,18 @@
         </main>
 
         <footer id="fo">
-            <div>
-                <button class="last" id="btn"><a href="./js任务4-2.html">开始游戏</a></button>
+            <div id="bv">
+                <button class="last" id="btn"><a>开始游戏</a></button>
             </div>
         </footer>
 
         <script>
+            // 获取btn按钮
+            var btn = document.getElementById("btn");
             // 获取传递玩家身份的数组allnum
             var allnum = localStorage.getItem("allnum");
             // 将字符串转换为数组,获取杀手，平民
             var arr = allnum.split(",")
-
-            // 获取btn按钮
-            var btn = document.getElementById("btn");
 
             // // 查看身份数组
             // console.log(allnum)
@@ -247,14 +253,12 @@
             // // 查看数组的长度
             // console.log(arr.length);
 
-            // 获取mian节点
-            var main = document.querySelector("main")
-
-            var index = 0;
-
+            // // 获取mian节点
+            // var main = document.querySelector("main")
 
 
             window.onload = function () {
+                var index = 0;
                 //添加div
                 for (index = 0; index < arr.length; index++) {
                     // 创建名为playerbox的div
@@ -262,36 +266,81 @@
                     box.className = "playerbox";
                     box.setAttribute("data-idx", index)
 
+                    console.log(arr[index]);
                     // 设置box中的内容
                     box.innerHTML =
                         "<p class='name'>" + (arr[index]) + "</p>" +
                         "<p class='number'>" + (index + 1) + "号" + "</p>" +
                         "<div class='playerpic'>" +
-                        "<img class='img' src='./images/src/发言讨论结束，投票_04.png'>" +
+                        "<img class='imgs' src='./images/src/发言讨论结束，投票_04.png'>" +
                         "</div>";
 
                     var boxs = document.getElementById("boxs");//获取boxs的节点
-                    boxs.appendChild(box);// 将boxs添加到box中
+                    $('#boxs').append(box);// 将boxs添加到box中
 
                     // console.log(index);
                     // console.log(arr[index]);
 
-
+                    // 选中变色
                     // 方法1
                     // 设置box点击事件，this指定box
                     box.onclick = function () {
+                        var array = this.getAttribute('data-idx');
+                        // console.log(array);
                         // console.log(this.getAttribute('data-idx'))
                         // console.log(this);
-                        this.style.backgroundColor = "#83b09a";
-                        event.srcElement.style.backgroundColor = "#83b09a";
-                        // console.log(event);
-                        // console.log(this.getAttribute('data-idx'))
+                        // 设置boxs盒子的隐藏显示
+                        $(".name").removeClass('give')
+                        $(".name").eq(array).addClass('give')
+                        // this.style.backgroundColor = "#83b09a";
+                        // event.srcElement.style.backgroundColor = "#83b09a";
 
-                        var array = this.getAttribute('data-idx');
-                        console.log(array);
-                        
-                        // location.href = 'js任务4-2.html';
-                        // window.localStorage.setItem('allnum', array)
+                        // console.log(event);
+                        // console.log(event.srcElement);
+
+                        // 设置图片隐藏显示
+                        $(".imgs").hide()
+                        $(".imgs").eq(array).show()
+
+                        // 字符串array转换成数字p
+                        var p = Number(array);
+                        var playernum = (p + 1);
+                        var playerRole = arr[playernum - 1]
+                        console.log(playerRole);
+
+
+                        // 设置天数
+                        sky = [];
+                        sky.day = 1;
+                        sky.playnum = index
+                        sky.push;
+                        console.log(sky);
+
+                        // 去除死亡人数
+                        // 建立空数组
+                        arrayDeath = [];
+                        // // 添加号数
+                        // arrayDeath.num = playernum;
+                        // // 添加玩家类型
+                        // arrayDeath.player = arr[playernum - 1]
+                        // var dea = arrayDeath;
+                        // console.log(arrayDeath);
+                        // console.log(dea);
+
+                        // 图片点击事件
+                        $(".imgs").click(function () {
+                            // 判断
+                            if (playerRole == '平民') {
+
+                                location.href = 'js任务4-2.html';
+                                window.localStorage.setItem('allNum', arr)
+                                // window.sessionStorage.setItem('allnum', arr)
+                                window.sessionStorage.setItem('player', playernum)
+                                window.localStorage.setItem('dieNum', dea)
+                            } else {
+                                alert('您是杀手不能杀死本职业，请选择其他玩家杀死')
+                            }
+                        });
                     };
 
                     // // 方法2
@@ -299,19 +348,23 @@
                     //     event.srcElement
                     //     event.srcElement.style.backgroundColor = "#83b09a";
                     // }
+                };
 
-                    btn.onclick = function () {
-                        document.getElementById("fo").style.display = "none";
-                        
-                        document.getElementById("btn").innerHTML = "确定";
-                        btn.innerHTML =
-                            "<a href='./js任务4-2.html'>" + "确定" + "</a>";
-                        last.css("pointer-events","all")
-                        // location.href = 'js任务4-2.html';
-                        // window.localStorage.setItem('allnum', arr)
-                        // window.localStorage.setItem('boxnumber', array)
-                        // document.getElementByIdx("btn").disabled = true;
-                    };
+                // 点击开始按钮
+                btn.onclick = function () {
+                    location.href = 'js任务4-2.html';
+                    // window.localStorage.setItem('allNum', arr)
+                    // window.sessionStorage.setItem('player', JSON.stringify(applyGood))
+
+                    // window.sessionStorage.setItem('alldata', JSON.stringify(gameData))
+
+
+                    // // document.getElementById("fo").style.display = "none";
+                    // document.getElementById("boxs").style.pointerEvents = "all";
+
+                    // document.getElementById("btn").innerHTML = "确定";
+                    // btn.innerHTML =
+                    //     "<a>" + "确定" + "</a>";
                 };
             };
 

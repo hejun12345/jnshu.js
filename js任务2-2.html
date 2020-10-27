@@ -315,11 +315,13 @@
                     for (var i = 0; i < person.value; i++) {
                         arr.push("平民");//输出平民的数量push到数组
                     }
+                    
                 }
             }
             Allplayer(playNumber.value);//自运行
 
             var array = arr;//访问全局变量arr
+            console.log(array);
 
             // 点击button按钮判断条件
             function button() {
@@ -342,8 +344,8 @@
                     };
                 };
             };
-            console.log(array);
-            console.log(arr[0]);
+            // console.log(array);
+            // console.log(arr[0]);
 
             // 链接发牌按钮
             window.onload = function () {
@@ -356,7 +358,8 @@
 
                     // 设置
                     location.href = 'js任务3.html';
-                    window.localStorage.setItem('allnum', arr)
+                    // window.localStorage.setItem('allnum', arr)
+                    window.localStorage.setItem('allnum', JSON.stringify(arr))
                 };
             };
 
@@ -367,7 +370,7 @@
                     button();
                     // 玩家input节点节点值 赋值给 将滑动条节点值：使滑动条随输入值改变
                     rangeNumber.value = playNumber.value;
-                    console.log(arr);
+                    // console.log(arr);
                 };
             };
 
@@ -384,7 +387,7 @@
                 playNumber.value = rangeNumber.value;
                 // 滑动时
                 Allplayer(rangeNumber.value)
-                console.log(arr);
+                // console.log(arr);
             }
             //减号按钮与滚动条同步
             function btLeft() {

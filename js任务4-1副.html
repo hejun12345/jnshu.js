@@ -4,6 +4,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="./jquery-3.5.1/jquery-3.5.1.min.js"></script>
+
         <title>投票</title>
         <style>
             * {
@@ -107,6 +109,8 @@
                 flex-wrap: wrap;
                 align-content: space-between;
                 padding: 0;
+                /*  */
+                /* pointer-events: none; */
             }
 
             .playerbox {
@@ -150,9 +154,9 @@
                 margin-bottom: 10vw;
             }
 
-            .playerbox:hover img {
+            /* .playerbox:hover img {
                 display: block;
-            }
+            } */
 
             /* footer */
             footer,
@@ -185,6 +189,17 @@
                 background-color: #fbb435;
                 font-size: 2vw;
             }
+
+            .give {
+                background-color: #83b09a;
+                /* color: #83b09a; */
+            }
+
+            .content-items {
+                width: 100px;
+                height: 100px;
+                background-color: yellow;
+            }
         </style>
     </head>
 
@@ -211,102 +226,132 @@
 
         <main>
             <div class="bigboxs" id="boxs">
-                <!-- 
-                <div class="playerbox" id="box1">
-                    <p class="name" id="name"></p>
-                    <p class="number" id="number"></p>
-                    <div class="playerpic">
-                        <img class="img" src="./images/src/发言讨论结束，投票_04.png">
-                    </div>
-                </div>
-             -->
+
             </div>
         </main>
 
-        <footer>
-            <div>
-                <button class="last" id="btn"><a href="./js任务4-2.html">投死</a></button>
+        <footer id="fo">
+            <div id="bv">
+                <button class="last" id="btn"><a>开始游戏</a></button>
             </div>
         </footer>
 
         <script>
+            // 获取btn按钮
+            var btn = document.getElementById("btn");
             // 获取传递玩家身份的数组allnum
             var allnum = localStorage.getItem("allnum");
             // 将字符串转换为数组,获取杀手，平民
             var arr = allnum.split(",")
 
-            // 获取btn按钮
-            var btn = document.getElementById("btn");
+            // // 查看身份数组
+            // console.log(allnum)
+            // // 查看身份数组的元素
+            // console.log(arr[0])
+            // // 查看数组的长度
+            // console.log(arr.length);
+            var index = 0;
 
-            // 查看身份数组
-            console.log(allnum)
-            // 查看身份数组的元素
-            console.log(arr[0])
-            // 查看数组的长度
-            console.log(arr.length);
+            var rgl = arr[index]
 
-            // 获取mian节点
-            var main = document.querySelector("main")
-
-            window.onload = function () {
-                //添加div
-                for (index = 0; index < arr.length; index++) {
-                    // var boxs = document.createElement("div");//添加子节点div
-                    // boxs.className = "boxs";//获取class为boxs
-                    // main.appendChild(boxs);//把boxs添加到main中
-                    var boxs = document.getElementById("boxs")//获取boxs的节点
-
-                    var box = document.createElement("div");//添加boxs的子节点div
-                    box.className = "playerbox";//获取css属性
-                    boxs.appendChild(box);//把box添加到boxs中
-
-                    var playerbox = document.createAttribute("id");
-                    playerbox.value = "playerbox"
-                    box.setAttributeNode(playerbox)
-
-                    var p1 = document.createElement("p");//添加文字节点
-                    p1.className = "name";
-                    box.appendChild(p1);
-                    p1.innerHTML = arr[index];//添加玩家信息
-
-                    var name = document.createAttribute("id");
-                    name.value = "name"
-                    p1.setAttributeNode(name)
-
-                    var p2 = document.createElement("p");
-                    p2.className = "number";
-                    box.appendChild(p2);
-                    p2.innerHTML = (index + 1) + "号";//玩家号数
-
-                    var number = document.createAttribute("id");
-                    number.value = "number"
-                    p2.setAttributeNode(number)
-
-                    var pic = document.createElement("div");//添加节点的子节点
-                    pic.className = "playerpic";
-                    box.appendChild(pic);
-
-                    var img = document.createElement("img");//添加图片节点
-                    img.className = "img";
-                    img.src = "./images/src/发言讨论结束，投票_04.png"//添加图组;
-                    pic.appendChild(img);
-
-                    console.log(index);
-                    console.log(arr[index]);
-                }
-
-                btn.onclick = function () {
-                    location.href = 'js任务4-2.html';
-                    window.localStorage.setItem('allnum', arr)
-
-                    document.getElementByIdx("btn").disabled = true;
-
+            $(function () {
+                
+                var identity = undefined;
+                var empty = undefined;
+                for (var i = 0; i < rgl; i++) {         //rgl  玩家数量
+                    identity = reordering[i].name;
+                    if (reordering[i].name === '平民') {    //判断是平民
+                        civiliansNumber++
+                    } else if (reordering[i].name === '杀手') {    //判断是杀手
+                        killerNumber++
+                    };
+                    if (killer[i].state === '1') {
+                        empty = '';
+                    } else if (killer[i].state === '0') {
+                        empty = 'content-color';
+                    };
+                    
+                    var box = '<div class="content-items ' + empty + '" id="box-' + [i] + '">' +
+                        '<div>' +
+                        '<div>' +
+                        '<p>' + identity + '</p>' +
+                        '<p>' + (i + 1) + '号' + '</p>' +
+                        '</div>' +
+                        '<div>' +
+                        '<img src="../image/刀.png" width="25px">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                    $('.bigboxs').append(box);    //   通过 append 添加盒子
+                };
+                var kNumber = sessionStorage.getItem("killerNumber");
+                var cNumber = sessionStorage.getItem("civiliansNumber");
+                if (kNumber !== null && cNumber !== null) {
+                    killerNumber = Number(kNumber)          // 杀手 人数
+                    civiliansNumber = Number(cNumber)        //  平民 人数
                 };
 
-                boxs.onclick = function () {
-                    document.getElementById("name").style.backgroundColor = "red";
-                }
-            }
+
+                // // 选中变色
+                // // 方法1
+                // // 设置box点击事件，this指定box
+                // box.onclick = function () {
+                //     var array = this.getAttribute('data-idx');
+                //     // 设置boxs盒子的隐藏显示
+                //     $(".name").removeClass('give')
+                //     $(".name").eq(array).addClass('give')
+
+                //     // 设置图片隐藏显示
+                //     $(".imgs").hide()
+                //     $(".imgs").eq(array).show()
+
+                //     // 字符串array转换成数字p
+                //     var p = Number(array);
+                //     var playernum = (p + 1);
+                //     var playerRole = arr[playernum - 1]
+                //     console.log(playerRole);
+
+
+                //     // 设置天数
+                //     sky = [];
+                //     sky.day = 1;
+                //     sky.playnum = index
+                //     sky.push;
+                //     console.log(sky);
+
+                //     // 去除死亡人数
+                //     // 建立空数组
+                //     arrayDeath = [];
+                //     // // 添加号数
+                //     // arrayDeath.num = playernum;
+                //     // // 添加玩家类型
+                //     // arrayDeath.player = arr[playernum - 1]
+                //     // var dea = arrayDeath;
+                //     // console.log(arrayDeath);
+                //     // console.log(dea);
+
+                //     // 图片点击事件
+                //     $(".imgs").click(function () {
+                //         // 判断
+                //         if (playerRole == '平民') {
+
+                //             location.href = 'js任务4-2.html';
+                //             window.localStorage.setItem('allNum', arr)
+                //             // window.sessionStorage.setItem('allnum', arr)
+                //             window.sessionStorage.setItem('player', playernum)
+                //             window.localStorage.setItem('dieNum', dea)
+                //         } else {
+                //             alert('您是杀手不能杀死本职业，请选择其他玩家杀死')
+                //         }
+                //     });
+                // };
+            });
+
+            // // 点击开始按钮
+            // btn.onclick = function () {
+            //     location.href = 'js任务4-2.html';
+            // };
+
         </script>
 
     </body>

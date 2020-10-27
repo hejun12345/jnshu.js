@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>游戏结果</title>
+        <script src="./jquery-3.5.1/jquery-3.5.1.min.js"></script>
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            html {
+                font-size: 62.5%;
+            }
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
+
+            img {
+                width: 4%
+            }
+
+            body {
+                background-color: #29bde0;
+            }
+
+            header {
+                height: 6vw;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid #74d4eb;
+                color: white;
+                margin-bottom: 1vw;
+                padding: 0 1vw;
+                font-size: 3vw;
+            }
+
+            .photo {
+                background: url("./images/src/结果页_03.png") no-repeat;
+                background-size: 35%;
+                background-position: center;
+                display: flex;
+                align-items: center;
+                height: 25vw;
+                padding: 1vw 0;
+            }
+
+            .duiqi {
+                text-align: center;
+
+            }
+
+            .result {
+                display: inline-block;
+                text-align: left;
+                font-size: 30px;
+                margin: 0 5vw;
+                color: #ffc865;
+            }
+
+            .boxs {
+                margin: 50px 0 0 5vw;
+                padding: 10px 0;
+                font-size: 20px;
+                color: white;
+            }
+
+            .last-p {
+                margin-bottom: 10px;
+            }
+
+            /*  */
+            .time {
+                background-color: white;
+                padding-left: 5vw;
+                height: 150px;
+                border-bottom: 1px solid #dddddd;
+            }
+
+            .box1 {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .one,
+            .two {
+                display: inline-block;
+                margin-top: 20px;
+                /*  */
+                font-size: 30px;
+            }
+
+            .two {
+                margin-right: 5vw;
+                font-size: 15px;
+                color: #d6d6d6;
+
+            }
+
+            .time1 {
+                margin: 10px 0;
+                font-size: 20px;
+                color: #a6a6a6;
+            }
+
+            /*  */
+            footer {
+                width: 100%;
+                position: fixed;
+                bottom: 0;
+                height: 10vw;
+                background-color: rgba(41, 189, 244, .5);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .b1,
+            .b2 {
+                width: 40%;
+                margin: 0 5vw;
+                height: 60%;
+                border: none;
+                border-radius: 10px;
+                font-size: 3vw;
+            }
+
+            .b1 {
+                background-color: #f66f6f;
+            }
+
+            .b2 {
+                background-color: #fbb425;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <img src="./images/src/结果页_01.png" content="width=device-width" , initial-scale=1.0>
+            <p>游戏结果</p>
+            <img src="./images/src/结果页_02.png">
+        </header>
+
+        <main>
+            <div class="photo"></div>
+            <div class="duiqi">
+                <p class="result">太棒了！你知道么？在捉鬼游戏中只有20%的卧底取得游戏最终的胜利哦！</p>
+            </div>
+            <div class="boxs">
+                <p>剩余玩家</p>
+                <span>杀&nbsp;手0人</span>
+                <span>平&nbsp;民6人</span><br>
+            </div>
+
+            <div class="time">
+                <div class="box1">
+                    <span class="one">第一天</span>
+                    <span class="two">0小时07分</span>
+                </div>
+                <div class="time1">
+                    <p>晚上：5号被杀手杀死，5号是水民</p>
+                    <p>白天：8号被全民投票投死，8号是杀手</p>
+                </div>
+            </div>
+            <div class="time">
+                <div class="box1">
+                    <span class="one">第二天</span>
+                    <span class="two">0小时07分</span>
+                </div>
+                <div class="time1">
+                    <p>晚上：5号被杀手杀死，5号是水民</p>
+                    <p>白天：8号被全民投票投死，8号是杀手</p>
+                </div>
+            </div>
+            <div class="time">
+                <div class="box1">
+                    <span class="one">第三天</span>
+                    <span class="two">0小时07分</span>
+                </div>
+                <div class="time1">
+                    <p>晚上：5号被杀手杀死，5号是水民</p>
+                    <p>白天：8号被全民投票投死，8号是杀手</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <button class="b1"><a href="./css.任务7-1.html">再来一局</a></button>
+            <button class="b2"><a href="">上传并分享</a></button>
+        </footer>
+
+        <script>
+            var time = document
+        </script>
+    </body>
+
+</html>

@@ -110,7 +110,7 @@
                 align-content: space-between;
                 padding: 0;
                 /*  */
-                pointer-events: none;
+                /* pointer-events: none; */
             }
 
             .playerbox {
@@ -144,14 +144,23 @@
                 font-size: 1.1vw;
             }
 
+            .playerpic {
+                display: flex;
+            }
+
             .playerpic img {
-                margin-top: 1.5vw;
+                margin-top: 5vw;
                 width: 20vw;
                 display: none;
             }
 
             .playerbox:last-child {
                 margin-bottom: 10vw;
+            }
+
+            .imgs {
+                zoom: .2;
+                margin: 0 auto
             }
 
             /* .playerbox:hover img {
@@ -190,14 +199,7 @@
                 font-size: 2vw;
             }
 
-            .death {
-                background-color: #83b09a;
-                /* color: #83b09a; */
-            }
         </style>
-    </head>
-
-    <body>
 
         <header>
             <div class="nav-hand">
@@ -220,15 +222,6 @@
 
         <main>
             <div class="bigboxs" id="boxs">
-                <!-- 
-                <div class="playerbox">
-                    <p class="name"></p>
-                    <p class="number"></p>
-                    <div class="playerpic">
-                        <img class="img" src="./images/src/发言讨论结束，投票_04.png">
-                    </div>
-                </div>
-             -->
             </div>
         </main>
 
@@ -239,118 +232,205 @@
         </footer>
 
         <script>
+            // 获取btn按钮
+            var btn = document.getElementById("btn");
             // 获取传递玩家身份的数组allnum
             var allnum = localStorage.getItem("allnum");
             // 将字符串转换为数组,获取杀手，平民
             var arr = allnum.split(",")
 
-            // 获取btn按钮
-            var btn = document.getElementById("btn");
+            var B = sessionStorage.getItem("bt");
 
-            // // 查看身份数组
-            // console.log(allnum)
-            // // 查看身份数组的元素
-            // console.log(arr[0])
-            // // 查看数组的长度
-            // console.log(arr.length);
+            var Y = sessionStorage.getItem("yw");
+            console.log(Y);
 
-            // 获取mian节点
-            var main = document.querySelector("main")
+            // 声明
+            var index;
+            var person;
+            var array;
+            var d;
+            var playernum;
 
-            var index = 0;
 
-            deal = '';
+            var arrPlayer = []
+            console.log(arrPlayer);
+            var arrKillNum = []
+            arrKillNum.push(array)
+            console.log(arrKillNum);
+            var arrVote = []
+            console.log(arrVote);
 
-            window.onload = function () {
+            $(document).ready(function () {
                 //添加div
                 for (index = 0; index < arr.length; index++) {
+
+                    if (arr[index] == "平民") {
+                        arrPlayer.push({
+                            name: "平民",
+                            death: true
+                        });
+                    } else {
+                        arrPlayer.push({
+                            name: "杀手",
+                            death: true
+                        });
+                    };
                     // 创建名为playerbox的div
                     var box = document.createElement("div");
                     box.className = "playerbox";
-                    box.setAttribute("data-idx", index)
+                    // setAttribute() 方法添加指定的属性，并为其赋指定的值。
+                    box.setAttribute("select-box", index);//号数
+                    box.setAttribute("select-person", arr[index]);//身份
 
-                    // 设置box中的内容
                     box.innerHTML =
-                        "<p class='name'>" + (arr[index]) + "</p>" +
+                        "<p class='name life " + deal + "' id='boxs" + (index + 1) + "'>" + (arr[index]) + "</p>" +
                         "<p class='number'>" + (index + 1) + "号" + "</p>" +
                         "<div class='playerpic'>" +
-                        "<img class='imgs' src='./images/src/发言讨论结束，投票_04.png'>" +
+                        "<img class='imgs' select-person='" + arr[index] + "' src='./images/JS.4-杀人.png'>" +
                         "</div>";
 
                     var boxs = document.getElementById("boxs");//获取boxs的节点
-                    boxs.appendChild(box);// 将boxs添加到box中
+                    $('#boxs').append(box);// 将boxs添加到box中
+
+
+                    var deal = "";
+                    // if (playernum == d) {
+                    //     deal = "xxxxx"
+                    // }
+                    // console.log(playernum);
+                    // console.log(d);
 
                     // console.log(index);
                     // console.log(arr[index]);
 
-                    // 设置天数
-                    num = [];
-                    num.day = 1;
-                    num.play = index
-                    num.push;
-                    // console.log(num);
+                    var itemId = '#boxs' + index;
+                    console.log(itemId);
 
                     // 选中变色
                     // 方法1
                     // 设置box点击事件，this指定box
-                    box.onclick = function () {
-                        var array = this.getAttribute('data-idx');
-                        console.log(array);
-                        // console.log(this.getAttribute('data-idx'))
+                    $(".playerbox").click(function () {
+                        // getAttribute() 方法返回指定属性名的属性值。
+                        var person = this.getAttribute('select-person');
+                        var array = this.getAttribute('select-box');
+                        // console.log(array);
+                        // console.log(this.getAttribute('select-box'))
                         // console.log(this);
-                        $(".name").removeClass('death')
-                        $(".name").eq(array).addClass('death')
+
+                        // 设置boxs盒子的隐藏显示
+                        $(".name").removeClass('.name').css('background-color', ' #f5c97b');
+                        $(this).children('.name').css('background-color', '#83b09a');
+
+                        // $(".name").removeClass('give').css('background-color', ' #f5c97b');
+                        // $(".name").eq(array).addClass('give').css('background-color', '#83b09a');
+
                         // this.style.backgroundColor = "#83b09a";
                         // event.srcElement.style.backgroundColor = "#83b09a";
+                        // console.log(event);
+                        // console.log(event.srcElement);
+
+                        // 设置图片隐藏显示
+                        $(".imgs").hide();
+                        $(".imgs").eq(array).show();
+
+                        // 字符串array转换成数字p
+                        var p = Number(array);
+                        // console.log(p);
+                        playernum = (p + 1);
+                        // console.log(playernum);
+                    });
+                };
 
 
-                        console.log(event);
-                        console.log(event.srcElement);
+                // 图片点击事件
+                $(".imgs").click(function () {
+                    var person = this.getAttribute('select-person');
+                    var array = this.getAttribute('select-box');
+                    // console.log(decide);
+                    // console.log(playernum);
 
-                        $(".imgs").hide()
-                        $(".imgs").eq(array).show()
-                        // 
+                    // // 获取数组
+                    // // var obj = { day: 1, kill: playernum, capacity: person };
+                    // var allobj = { day: 1, baitain: B, capacity: person, yewan: Y };
+                    // // obj = JSON.stringify(obj);
+                    // console.log(allobj);
+                    // console.log(Y);
 
+                    // 判断身份
+                    if (person == '平民') {
+                        location.href = 'js任务4-2.html';
+                        window.localStorage.setItem('allNum', arr);
+                        // 传递号数
+                        window.sessionStorage.setItem('playernum', playernum);
+                        // 传递身份
+                        window.sessionStorage.setItem('person', person);
 
-                        // location.href = 'js任务4-2.html';
-                        // window.sessionStorage.setItem('allnum', arr)
-                        // window.sessionStorage.setItem('boxnumber', array)
-                        // // console.log(this.getAttribute('data-idx'))
+                        window.sessionStorage.setItem('temp2', JSON.stringify(obj))
+                    }
 
-                        // location.href = 'js任务4-2.html';
-                        // window.localStorage.setItem('allnum', array)
-                    };
+                    if (person == '杀手') {
+                        alert('您是杀手不能杀死本职业，请选择其他玩家杀死');
+                    }
+                });
 
+                // if ((d - 1) < (arr.length + 1) && (d - 1) > 0) {
+                //     var itemId = '#boxs' + d;
+                //     $(itemId).addClass('give').css('background-color', '#fff');
+                // }
+
+                // 点击开始按钮
+                btn.onclick = function () {
+                    var allobj = { day: 1, baitian: B, capacity: person, yewan: Y };
+
+                    location.href = 'js任务4-2.html';
+                    window.localStorage.setItem('allNum', arr);
+                    // 传递号数
+                    window.sessionStorage.setItem('player', playernum);
+                    // 传递身份
+                    window.sessionStorage.setItem('capacity', person);
+
+                    window.sessionStorage.setItem('temp2', JSON.stringify(obj))
+                };
+            });
+
+        </script>
+
+        </body>
+
+</html>
+
+<!-- 
+    
+                        // // 设置天数
+                        // sky = [];
+                        // sky.day = 1;
+                        // sky.playnum = index
+                        // sky.push;
+                        // console.log(sky);
+
+                        // // 去除死亡人数
+                        // // 建立空数组
+                        // arrayDeath = [];
+                        // // // 添加号数
+                        // // arrayDeath.num = playernum;
+                        // // // 添加玩家类型
+                        // // arrayDeath.player = arr[playernum - 1]
+                        // // var dea = arrayDeath;
+                        // // console.log(arrayDeath);
+                        // // console.log(dea);
                     // // 方法2
                     // box.onclick = function (event) {
                     //     event.srcElement
                     //     event.srcElement.style.backgroundColor = "#83b09a";
                     // }
-                };
+ -->
 
-                // 点击开始按钮
-                btn.onclick = function () {
-                    location.href = 'js任务4-2.html';
-                    window.sessionStorage.setItem('allnum', arr)
-
-                    // // document.getElementById("fo").style.display = "none";
-                    // document.getElementById("boxs").style.pointerEvents = "all";
-
-                    // document.getElementById("btn").innerHTML = "确定";
-                    // btn.innerHTML =
-                    //     "<a>" + "确定" + "</a>";
-
-
-                    // last.css("pointer-events", "all")
-
-
-                    // window.sessionStorage.setItem('boxnumber', array)
-                    // document.getElementByIdx("btn").disabled = true;
-                };
-            };
-
-        </script>
-
-    </body>
-
-</html>
+<!-- 
+                <div class="playerbox">
+                    <p class="name"></p>
+                    <p class="number"></p>
+                    <div class="playerpic">
+                        <img class="img" src="./images/src/发言讨论结束，投票_04.png">
+                    </div>
+                </div>
+  -->

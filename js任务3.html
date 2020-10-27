@@ -166,18 +166,21 @@
             // 获取按钮button节点
             var button = document.querySelector('button');
 
-            // 获取传递玩家身份的数组allnum
-            var allnum = localStorage.getItem("allnum");
-            // console.log(localStorage.getItem("allnum"));
-            // 将字符串转换为数组,获取杀手，平民
-            var arr = allnum.split(",")
+            // // 获取传递玩家身份的数组allnum
+            // var allnum = localStorage.getItem("allnum");
+            // // console.log(localStorage.getItem("allnum"));
+            // // 将字符串转换为数组,获取杀手，平民
+            // var arr = allnum.split(",")
 
-            // 查看身份数组
-            console.log(allnum)
-            // 查看身份数组的元素
-            console.log(arr[0])
-            // 查看数组的长度
-            console.log(arr.length);
+            // // 查看身份数组
+            // console.log(allnum)
+            // // 查看身份数组的元素
+            // console.log(arr[0])
+            // // 查看数组的长度
+            // console.log(arr.length);
+
+            var arr = JSON.parse(window.localStorage.getItem('allnum'))
+            console.log(arr)
 
             var index = 0;
             // console.log(index);

@@ -1,63 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-        <meta charset="utf-8" />
-        <title></title>
-        <script type="text/javascript">
-        //onclick事件传入value值和id
-            function bt1(value, id) {
-            //判断点击的按钮的id是否存在,不存在则创建,存在则alert
-                if(!document.getElementById(id)) {
-                //创建input元素
-                    var inp = document.createElement("input");
-                    inp.type = "button";
-                    //传入点击按钮的value值到新的按钮
-                    inp.value = value;
-                    //传入点击按钮的id到新的按钮(传入是id+1防止重复)
-                    inp.id = id;
-                    //当方法有参数时，用onclick = 方法名(参数)时就有错了，需要在方法名前面加function()
-                    inp.onclick = function() {
-                        b1(id);
-                    };
-                    document.getElementById("div").appendChild(inp);
-                } else {
-                    alert("已存在")
-                }
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            /* 默认隐藏小刀 */
+            .knife {
+                display: none;
             }
-            function b1(id) {
-                var flag = confirm("确认删除?");
-                if(flag) {
-                    document.getElementById(id).remove();
-                }
+
+            /*隐藏单选按钮默认样式*/
+            input[type="radio"] {
+
+                position: absolute;
+
+                clip: rect(0, 0, 0, 0);
+
             }
-        </script>
-        <style type="text/css">
-            #div {
-                width: 600px;
-                height: 450px;
-                border: 1px solid black;
-            }
-            #div2 {
-                width: 600px;
-                height: 50px;
-                border: 1px solid black;
-            }
-            input {
-                margin-left: 21px;
-                width: 90px;
-                height: 45px;
+
+            /* 选中时显示小刀 */
+            input[type="radio"]:checked+.knife {
+                display: block;
             }
         </style>
     </head>
-    <body>
-        <div id="div"></div>
 
-        <div id="div2">
-            <input type="button" id="bt1" value="体育" onclick="bt1(this.value,this.id+1)" />
-            <input type="button" id="bt2" value="语文" onclick="bt1(this.value,this.id+1)" />
-            <input type="button" id="bt3" value="数学" onclick="bt1(this.value,this.id+1)" />
-            <input type="button" id="bt4" value="英语" onclick="bt1(this.value,this.id+1)" />
-            <input type="button" id="bt5" value="美术" onclick="bt1(this.value,this.id+1)" />
-        </div>
+    <body>
+        <script>
+            $('.photo').click(function () {
+                /* 重置一下存活状态盒子的颜色，如果你点了死者的盒子当然也是要重置的 */
+                for (let i = 0; i < identity.length; i++) {
+                    let a = person[i].state;
+                    if (a == '存活') {
+                        $('.photo').eq(i).children('.realId').css('background', '#fbb435');
+                    } else if (a == '被杀手杀死' || a == '被投票处决') {
+                        $('.photo').eq(i).children('.realId').css('background', '#fff');
+                    }
+                }
+
+                /* 选择的对应框变色 */
+                $(this).children('.realId').css('background', 'green');
+
+                /* 被选人的编号 */
+                idnum = $(this).attr('id') - 1;
+
+            })
+        </script>
+
+        <script>
+            //生成所有角色页面
+            for (var i = 0; i < allNum; i++) {
+                var txt = `
+                <label for="div1">
+                    <div class="number">
+                        <div class="card">
+                            <p class="alive">水民</p>
+                            <p class="serial">1号</p>
+                        </div>
+                        <input type="radio" name="role" id="div1">
+                        <div class="knife">
+                            <img src="./img/knife.png" alt="">
+                        </div>
+                    </div>
+                </label>`;
+                $('.main2').append(txt);
+                //显示是水民还是杀手
+                $('.alive').eq(i).text(function () {
+                    return role[i];
+                });
+                //显示编号
+                $('.serial').eq(i).text(function () {
+                    return i + 1;
+                });
+                //添加value;
+                $('input').eq(i).attr("value", function () {
+                    return i + 1;
+                });
+                //添加id
+                $('input').eq(i).attr("id", function () {
+                    return "input" + (i + 1);
+                });
+                //添加for属性值和id相同
+                $('label').eq(i).attr("for", function () {
+                    return "input" + (i + 1);
+                });
+            }
+        </script>
     </body>
+
 </html>

@@ -229,28 +229,26 @@
             var btn2 = document.getElementById("btn2");
             // 获取传递玩家身份的数组allnum
             var allnum = localStorage.getItem("allNum");
+            // var allnum = sessionStorage.getItem("allNum");
             // 将字符串转换为数组,获取杀手，平民
             var arr = allnum.split(",");
-
             // 获取玩家号数
-            var playnum = sessionStorage.getItem("playernum");
+            var playnum = sessionStorage.getItem("player");
             console.log(playnum);
 
-            // 创建时间
-            var time = ["day", "night"]
-
             // 获取
-            // var obj = JSON.parse(window.sessionStorage.getItem('temp2'))
-            // console.log(obj);
-            // var days = obj["day"]
+            var obj = JSON.parse(window.sessionStorage.getItem('temp2'))
+            console.log(obj);
 
+            var days = obj["day"]
 
             // var boxs = document.getElementById("boxs");
+
             $(document).ready(function () {
 
-                for (var i = 1; i < 7; i++) {
-                    $("#day").text('第' + 'days' + '天');
-                }
+                // for (var days = obj["day"]; days < (arr.length + 1); days++) {}
+                $("#day").text('第' + days + '天');
+
                 // 获取有限状态机变量
                 var pro1 = document.getElementsByClassName('word')[0];
                 var pro2 = document.getElementsByClassName('word')[1];
@@ -295,16 +293,18 @@
                         if (fsm.state === 'step1') {
                             // 在id为box1的div中创建一个div
                             $("div#box1").after("<div class='process' id='add'>" + playnum + "号被杀死,真实身份是" + arr[playnum - 1] + "</div>");
+                            console.log(arr.length)
                             console.log(playnum)
                             console.log(arr[playnum - 1])
+
+
+                            window.sessionStorage.setItem('yw', playnum);
 
                             pro1.style.backgroundColor = 'rgb(255, 255, 0)'
                         }
                         fsm.pro1();
                     } else {
                         location.href = 'js任务4-1.html';
-                        window.sessionStorage.setItem('killNum', killNum);
-                        console.log(playnum)
                     }
                 }
 
@@ -334,14 +334,30 @@
                         console.log(arr.length)
                         console.log(playnum)
                         console.log(arr[playnum - 1])
-                        window.sessionStorage.setItem('voteNum', voteNum);
+                        window.sessionStorage.setItem('bt', playnum);
+
+                        // alert('颜色结束')
+                        // pro1.style.backgroundColor = 'rgb(255, 0, 0)'
+                        // pro2.style.backgroundColor = 'rgb(255, 255, 0)'
+                        // pro3.style.backgroundColor = 'rgb(0, 255, 0)'
                     }
                     fsm.pro4();
                 }
+                // 
 
-                for (p = 0; p < arr.length; p++) {
+                // 跳转
+                // play.onclick = function () {
+                //     if (index === array.length) {
+                //         console.log(index)
+                //         console.log(array.length)
 
-                }
+                //         document.body.innerHTML = "";
+                //     }
+                //     //  else if (index != array.length) {
+                //     //     location.href = 'js任务4-1.html';
+                //     //     window.localStorage.setItem('allnum', arr);
+                //     // }
+                // };
 
                 btn2.onclick = function () {
                     location.href = 'js任务4-1.html';
@@ -354,3 +370,30 @@
     </body>
 
 </html>
+
+<!-- // box1.onclick = function () {
+    //     if (index < arr.length) {
+    //         index++;
+
+    //         var div = document.createElement("div");
+    //         div.className = "process";
+
+    //         var add = document.createAttribute("id");
+    //         add.value = "add"
+    //         div.setAttributeNode(add)
+    //         // 创建死亡玩家的文本
+    //         var deadText = document.createTextNode(index + "号被杀死,真实身份是" + array[index - 1]);
+    //         div.appendChild(deadText);
+
+    //         // 获取id为box2的节点
+    //         var box2 = document.getElementById("box2");
+    //         // 获取id为boxs的节点
+    //         var boxs = document.getElementById("boxs");
+    //         /*  insertBefore()
+    //             可以在指定的子节点前插入新的子节点
+    //             语法：父节点.insertBefore(新节点,旧节点);
+    //         */
+    //         boxs.insertBefore(div, box2);
+    //         console.log(index)
+    //     }
+    // }; -->
